@@ -10,7 +10,7 @@ postgres:
 
 receiver:
         build: ./receiver
-        hostname: iotdatacenterreceiver
+        hostname: receiver
         expose:
                 - 8181
                 - 61616
@@ -20,3 +20,8 @@ receiver:
         links:
                 - postgres
 
+rules:
+        build: ./Rules
+        hostname: iotdatacenterrules
+        links:
+               - receiver
