@@ -6,7 +6,7 @@
 
 # This script builds all required docker images.
 
-IMAGE_NAME="iotdemofuse_iotdatacenterbpm_1"
+IMAGE_NAME="bpm"
 
 function connect_image {
   IMAGE=$1
