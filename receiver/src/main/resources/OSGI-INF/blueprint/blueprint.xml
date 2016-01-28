@@ -32,64 +32,56 @@
 	  <camelContext xmlns="http://camel.apache.org/schema/blueprint">
   <route id="datacenter_receive">
     <from uri="activemq:queue:message.to.datacenter"/>
+    <log message = "${body}"/>
     <multicast>
       <to uri="direct:Monitoring"/>
       <to uri="direct:filtering"/>
     </multicast>
   </route>
-
   <route id="Filtering">
     <from uri="direct:filtering"/>
-  
- 	<unmarshal>
-     	<jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
-   	</unmarshal>
-  		
-  	<choice>
-  		<when>
-  			<simple>${body.deviceType} == 'temperature'</simple>
-  			<to uri="direct:handleTemperature"/> 
-  		</when>
-  		<when>
-  			<simple>${body.deviceType} == 'humidity'</simple>
-  			<to uri="direct:handleHumidity"/> 
-  		</when>
-  		<when>
-  			<simple>${body.deviceType} == 'voltage'</simple>
-  			<to uri="direct:handleVoltage"/> 
-  		</when>
- 	</choice>
-     
+    <unmarshal>
+      <jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
+    </unmarshal>
+    <choice>
+      <when>
+        <simple>${body.deviceType} == 'temperature'</simple>
+        <to uri="direct:handleTemperature"/>
+      </when>
+      <when>
+        <simple>${body.deviceType} == 'humidity'</simple>
+        <to uri="direct:handleHumidity"/>
+      </when>
+      <when>
+        <simple>${body.deviceType} == 'voltage'</simple>
+        <to uri="direct:handleVoltage"/>
+      </when>
+    </choice>
   </route>
-  
   <route id="Temperature">
     <from uri="direct:handleTemperature"/>
     <log message="In Temperature"/>
     <to uri="bean:dataToSQL?method=toSql(${body},'temperature')"/>
-    <to uri="jdbc:datasource"/>   
+    <to uri="jdbc:datasource"/>
   </route>
-
-   <route id="Humidity">
+  <route id="Humidity">
     <from uri="direct:handleHumidity"/>
     <log message="In Humidity"/>
     <to uri="bean:dataToSQL?method=toSql(${body},'humidity')"/>
-    <to uri="jdbc:datasource"/>   
+    <to uri="jdbc:datasource"/>
   </route>
-
- <route id="Voltage">
+  <route id="Voltage">
     <from uri="direct:handleVoltage"/>
     <log message="In Voltage"/>
     <to uri="bean:dataToSQL?method=toSql(${body},'voltage')"/>
-    <to uri="jdbc:datasource"/>   
+    <to uri="jdbc:datasource"/>
   </route>
-
   <route id="Monitoring">
     <from uri="direct:Monitoring"/>
-    <log message="Message will be send to monitor"/>
-    <to uri="activemq:queue:message.to.monitor"/>
+    <log message="Message will be send to rules server"/>
+    <log message="${body}"/>
+    <to uri="activemq:queue:message.to.rules"/>
   </route>
-   
-
 </camelContext>
 
 </blueprint>

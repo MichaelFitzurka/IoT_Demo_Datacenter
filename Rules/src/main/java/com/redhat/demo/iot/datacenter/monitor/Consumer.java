@@ -51,7 +51,6 @@ public class Consumer  implements ExceptionListener  {
              if (message instanceof TextMessage) {
                  textMessage = (TextMessage) message;
                  text = textMessage.getText();
-                 System.out.println("Received: " + text);
              } 
          } catch (Exception e) {
              System.out.println("Caught: " + e);

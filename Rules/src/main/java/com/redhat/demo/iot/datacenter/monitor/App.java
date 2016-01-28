@@ -41,7 +41,7 @@ public class App
 		BRMSServer brmsServer = new BRMSServer();
 		
 		while ( 1 ==1 ) {
-			messageFromQueue = consumer.run(20000);
+			messageFromQueue = consumer.run(20000);		
 			
 			if ( messageFromQueue != null ) {
 				

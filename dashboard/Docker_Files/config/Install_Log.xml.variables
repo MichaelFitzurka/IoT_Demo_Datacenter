@@ -1,0 +1,5 @@
+adminPassword=change12_me
+Dashboard.admin.password=change12_me
+Teiid.user.password=change12_me
+Modeshape.password=change12_me
+vault.keystorepwd=change12_me

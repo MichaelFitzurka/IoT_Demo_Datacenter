@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = { "timestamp", "deviceType", "deviceID", "payload","required","average", "errorCode", "errorMessage" })
 public class DataSet {
 	private String	timestamp;
-	private int		deviceType;
+	private String	deviceType;
 	private int		deviceID;	
 	private	int		payload;
 	private int		required;
@@ -20,14 +20,14 @@ public class DataSet {
 	public DataSet()
 	{
 		this.timestamp 	= "";
-		this.deviceType = 0;
+		this.deviceType = "";
 		this.deviceID	= 0;
 		this.payload	= 0;
 		this.required	= 0;
 		this.average	= 0;
 	}
 	
-	public DataSet(String time, int devType, int devID, int pay, int required, float average)
+	public DataSet(String time, String devType, int devID, int pay, int required, float average)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -68,14 +68,14 @@ public class DataSet {
 	/**
 	 * @return the deviceType
 	 */
-	public int getDeviceType() {
+	public String getDeviceType() {
 		return deviceType;
 	}
 
 	/**
 	 * @param deviceType the deviceType to set
 	 */
-	public void setDeviceType(int deviceType) {
+	public void setDeviceType(String deviceType) {
 		this.deviceType = deviceType;
 	}
 
