@@ -59,11 +59,12 @@ public class App
 	            	
 	            	System.out.println("Need to call BPM Process!");
 	            	
-	//            	BPMClient bpmClient = new BPMClient();
-	//            	bpmClient.doCall("http://iotdatacenterbpm:8080/business-central", 
-	//            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0", 
-	//            				     "psteiner", "change12_me",
-	//            				     event);
+	            	BPMClient bpmClient = new BPMClient();
+	            	bpmClient.doCall("http://bpm:8080/business-central", 
+	            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0",
+	            				     "IoT_Human_Task.low_voltage",
+	            				     "psteiner", "change12_me",
+	            				     event);
 	
 
 	            } 

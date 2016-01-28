@@ -19,7 +19,7 @@ public class BPMClient {
 
 	}
 
-	public void doCall(String applicationContext, String deploymentId, String userId, String password, DataSet myData) {
+	public void doCall(String applicationContext, String deploymentId, String definitionId, String userId, String password, DataSet myData) {
 		runtimeEngine = getRuntimeEngine( applicationContext, deploymentId, userId, password );
 
 		KieSession kieSession = runtimeEngine.getKieSession();
@@ -30,7 +30,7 @@ public class BPMClient {
 
 		params.put("process_variable", myData );
 
-		ProcessInstance processInstance = kieSession.startProcess( "IoT_Human_Task.WorkProblem", params );
+		ProcessInstance processInstance = kieSession.startProcess( definitionId, params );
 
 		long procId = processInstance.getId();
 	}

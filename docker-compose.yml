@@ -25,3 +25,12 @@ rules:
         hostname: iotdatacenterrules
         links:
                - receiver
+               - bpm
+
+bpm:
+        build:  ./bpm
+        hostname: bpm
+        expose:
+               - 8080
+        ports:
+               - 8090:8080
