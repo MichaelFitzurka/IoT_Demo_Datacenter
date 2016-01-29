@@ -8,9 +8,6 @@ ENV PGDATA /var/lib/pgsql/9.3/data
 ENV PGINST /usr/pgsql-9.3
 ENV HOME /home/postgres
 
-# Update the system
-RUN yum -y update;yum clean all
-
 ############################################################################
 # Install PostgreSQL 9.3
 #
