@@ -1,0 +1,38 @@
+package com.redhat.demo.iot.datacenter.monitor
+ 
+import com.redhat.demo.iot.datacenter.monitor.DataSet;
+
+rule "VoltageToLow"
+	lock-on-active true
+	when
+		$t : DataSet( deviceType == "voltage", payload < 2000 )
+	then
+		$t.setRequired(1);
+		$t.setErrorCode(1);
+		$t.setErrorMessage("Voltage to low");
+		update( $t );
+		
+end 
+
+rule "TemperatureToHigh"
+	lock-on-active true
+	when
+		$t : DataSet( deviceType == "temperature", payload > (average + 10) )
+	then
+		$t.setRequired(1);
+		$t.setErrorCode(1);
+		$t.setErrorMessage("Temperature to high");
+		update( $t );
+		
+end 
+ 
+rule "TemperatureToLow"
+	lock-on-active true
+	when
+		$t : DataSet( deviceType == "temperature", payload < (average - 10) )
+	then
+		$t.setRequired(1);
+		$t.setErrorCode(2);
+		$t.setErrorMessage("Temperature to low");
+		update( $t ); 
+end  

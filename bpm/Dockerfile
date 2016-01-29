@@ -11,7 +11,6 @@ ADD Docker_Files/software/ $HOME/tmp/
 ADD Docker_Files/config/ $HOME/tmp/
 ADD Docker_Files/niogit $HOME/tmp/niogit/
 ADD Docker_Files/repositories $HOME/tmp/repositories/
-ADD Docker_Files/security $HOME/tmp/security/
 ADD Docker_Files/index $HOME/tmp/index/
 ADD Docker_Files/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/tmp/
 
@@ -30,7 +29,6 @@ RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration
 
 # copy out process to the right place
 RUN mv $HOME/tmp/niogit $HOME/.niogit
-RUN mv $HOME/tmp/security $HOME/.security
 RUN mv $HOME/tmp/repositories $HOME/repositories
 RUN mv $HOME/tmp/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/
 RUN mv $HOME/tmp/index $HOME/.index
