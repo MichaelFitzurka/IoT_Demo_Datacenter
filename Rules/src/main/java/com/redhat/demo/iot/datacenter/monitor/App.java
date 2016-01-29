@@ -54,6 +54,8 @@ public class App
 		
 	            event.setRequired(0);	            
 	            event = brmsServer.insert( event);
+	            
+	            System.out.println("Rules Event-DeviceType <"+event.getDeviceType()+">");
 	                     
 	            if ( event.getRequired() == 1 ) {
 	            	
