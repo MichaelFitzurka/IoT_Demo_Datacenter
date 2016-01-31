@@ -16,12 +16,17 @@ public class App
 {
     private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
 	
+    private static final String DEFAULT_RECEIVER	= "localhost";
+	
+    
 	public static String sourceBrokerURL = "tcp://receiver:61616";
-	public static String sourceQueueName = "message.to.rules";
+	public static String sourceQueueName = "message.to.rules"; 
 	 
     public static void main( String[] args ) throws Exception
     {
-    	String	messageFromQueue;
+    	String messageFromQueue;
+    	String brokerURLMQTT = "tcp://" + System.getProperty("receiverURL",DEFAULT_RECEIVER) +  ":1883";
+        
     		
     	System.out.println(" Check if remote AMQ-Broker are already available");
     	AMQTester tester = new AMQTester(); 
@@ -68,6 +73,9 @@ public class App
 	            				     "psteiner", "change12_me",
 	            				     event);
 	
+	            	System.out.println("Need to turn on alarm light!");
+	            	MQTTProducer producer = new MQTTProducer(brokerURLMQTT, "admin", "change12_me", "mqtt.receiver");
+	            	producer.run("iotdemocommand/light", "an");
 
 	            } 
 	            	            
