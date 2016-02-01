@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1454065115918
-Build-Jdk: 1.8.0_25
+Bnd-LastModified: 1454178017498
+Build-Jdk: 1.8.0_71
 Built-By: psteiner
 Bundle-ManifestVersion: 2
 Bundle-Name: IOT Datacenter Receiver

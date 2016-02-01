@@ -26,6 +26,9 @@ rules:
         links:
                - receiver
                - bpm
+        environment:
+               - mqttReceiverURL=192.168.178.103
+
 
 bpm:
         build:  ./bpm
