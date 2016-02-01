@@ -25,13 +25,11 @@ public class App
     public static void main( String[] args ) throws Exception
     {
     	String messageFromQueue;
-    	String brokerURLMQTT = "tcp://" + System.getProperty("receiverURL",DEFAULT_RECEIVER) +  ":1883";
+    	String brokerURLMQTT = "tcp://" + System.getProperty("mqttReceiverURL",DEFAULT_RECEIVER) +  ":1883";
         
     		
     	System.out.println(" Check if remote AMQ-Broker are already available");
     	AMQTester tester = new AMQTester(); 
-    	
-    
     	
     	while( tester.testAvailability( sourceBrokerURL ) == false ) {
     		System.out.println(" AMQ-Broker " + sourceBrokerURL + " not yet available ");
@@ -66,13 +64,20 @@ public class App
 	            	
 	            	System.out.println("Need to call BPM Process!");
 	            	
-	            	BPMClient bpmClient = new BPMClient();
-	            	bpmClient.doCall("http://bpm:8080/business-central", 
-	            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0",
-	            				     "IoT_Human_Task.low_voltage",
-	            				     "psteiner", "change12_me",
-	            				     event);
-	
+
+	            	try {
+	            		BPMClient bpmClient = new BPMClient();
+		
+	            		bpmClient.doCall("http://bpm:8080/business-central", 
+		            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0",
+		            				     "IoT_Human_Task.low_voltage",
+		            				     "psteiner", "change12_me",
+		            				     event);
+	            	} catch (Exception ex) {
+	            		System.out.println("Exception when calling BPMSuite");
+	                }
+	            
+	            
 	            	System.out.println("Need to turn on alarm light!");
 	            	MQTTProducer producer = new MQTTProducer(brokerURLMQTT, "admin", "change12_me", "mqtt.receiver");
 	            	producer.run("iotdemocommand/light", "an");

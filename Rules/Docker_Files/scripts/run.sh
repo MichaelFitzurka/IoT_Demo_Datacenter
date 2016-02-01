@@ -15,4 +15,4 @@
 # done
 
 echo "Starting monitor"
-java -jar $HOME/tmp/$APPL
+java -jar -DmqttReceiverURL=$mqttReceiverURL $HOME/tmp/$APPL
