@@ -16,7 +16,7 @@ public class App
 {
     private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
 	
-    private static final String DEFAULT_RECEIVER	= "localhost";
+    private static final String DEFAULT_RECEIVER	= "192.168.42.1";
 	
     
 	public static String sourceBrokerURL = "tcp://receiver:61616";

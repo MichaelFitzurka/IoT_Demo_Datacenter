@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "-Building deloyables"
+echo "-Building deployables"
 
 export BUILD_LOGFILE="../build.log"
 

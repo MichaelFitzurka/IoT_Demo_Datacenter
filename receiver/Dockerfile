@@ -4,7 +4,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
 
-ENV BUNDLE_NAME datacenter_receiver-1.0.0-SNAPSHOT.jar 
+ENV BUNDLE_NAME datacenter_receiver-1.0.0-SNAPSHOT.jar
 ENV BROKER_NAME iotdatacenterreceiver
 
 # copy required ( or not ) configurations
@@ -35,7 +35,7 @@ RUN $HOME/tmp/install.sh
 RUN mv $HOME/tmp/activemq.xml $HOME/$FUSE_LOCATION/etc
 
 # open ports
-EXPOSE 22 8101 8181 44444 1099 61616 80 8080 
+EXPOSE 22 8101 8181 44444 1099 61616 80 8080 4711
 
 # ENTRYPOINT $HOME/$FUSE_LOCATION/bin/fuse
 CMD $HOME/run.sh

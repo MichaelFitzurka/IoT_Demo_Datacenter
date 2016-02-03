@@ -10,7 +10,7 @@ import org.kie.api.runtime.process.WorkItemManager;
 
 public class LightWorkItemHandler implements WorkItemHandler {
 	
-	 private static final String DEFAULT_MQTT_RECEIVER	= "localhost";
+	 private static final String DEFAULT_MQTT_RECEIVER	= "192.168.42.1";
 	
 	
 	public void abortWorkItem(WorkItem wi, WorkItemManager wim) {
@@ -38,7 +38,7 @@ public class LightWorkItemHandler implements WorkItemHandler {
 		}
 		
 		
-		System.out.println("Message transmitted via mqtt");
+		System.out.println("V0.1 Message transmitted via mqtt");
 		
 		wim.completeWorkItem(wi.getId(), null);
 	}
