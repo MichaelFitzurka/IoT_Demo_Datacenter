@@ -18,7 +18,7 @@ public class AMQTester {
 		
         try {
         	// Create a ConnectionFactory
-            connectionFactory = new ActiveMQConnectionFactory("admin", "admin", brokerURL);
+            connectionFactory = new ActiveMQConnectionFactory("admin", "change12_me", brokerURL);
 
             // Create a Connection
             connection = connectionFactory.createConnection();

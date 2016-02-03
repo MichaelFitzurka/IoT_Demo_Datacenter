@@ -21,7 +21,7 @@ public class Consumer  implements ExceptionListener  {
 	
 	public Consumer(String queueName, String brokerURL) throws JMSException {
 	     // Create a ConnectionFactory
-        connectionFactory = new ActiveMQConnectionFactory("admin", "admin", brokerURL);
+        connectionFactory = new ActiveMQConnectionFactory("admin", "change12_me", brokerURL);
 
         // Create a Connection
         connection = connectionFactory.createConnection();

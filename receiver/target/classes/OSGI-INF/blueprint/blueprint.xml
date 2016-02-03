@@ -10,7 +10,7 @@
           <bean class="org.apache.activemq.ActiveMQConnectionFactory">
             <property name="brokerURL" value="vm://localhost?create=false&amp;waitForStart=10000" />
             <property name="userName" value="admin"/>
-            <property name="password" value="admin"/>
+            <property name="password" value="change12_me"/>
           </bean>
         </property>
     </bean>
@@ -20,7 +20,7 @@
           <bean class="org.apache.activemq.ActiveMQConnectionFactory">
             <property name="brokerURL" value="tcp://192.168.42.1:61616" />
             <property name="userName" value="admin"/>
-            <property name="password" value="admin"/>
+            <property name="password" value="change12_me"/>
           </bean>
         </property>
     </bean>
@@ -99,8 +99,8 @@
     <from uri="jetty:http://0.0.0.0:4711/lightsOff?matchOnUriPrefix=true"/>
     <log message="Received message to be forwarded to Gateway"/>
     <log message="${body}"/>
-     <process ref="myJettyProcessor"/>
-    <to uri="smartGatewayAMQ:queue:message.from.datacenter"/>
+    <process ref="myJettyProcessor"/>
+    <to pattern="OutOnly" uri="smartGatewayAMQ:queue:message.from.datacenter"/>
   </route>
 </camelContext>
 

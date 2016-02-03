@@ -40,3 +40,5 @@ bpm:
                - 8080
         ports:
                - 8090:8080
+        links:
+               - receiver

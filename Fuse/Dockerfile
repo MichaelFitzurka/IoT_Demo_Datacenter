@@ -49,7 +49,7 @@ RUN rm -rf $HOME/tmp/src && \
 RUN mv $HOME/tmp/activemq.xml $HOME/$FUSE_LOCATION/etc
 
 # creates user
-RUN sed -i "s/#admin/admin/" $HOME/$FUSE_LOCATION/etc/users.properties
+RUN sed -i "s/#admin=admin/admin=change12_me/" $HOME/$FUSE_LOCATION/etc/users.properties
 RUN sed -i "s/#activemq.jmx.user/activemq.jmx.user/" $HOME/$FUSE_LOCATION/etc/system.properties
 RUN sed -i "s/#activemq.jmx.password/activemq.jmx.password/" $HOME/$FUSE_LOCATION/etc/system.properties
 

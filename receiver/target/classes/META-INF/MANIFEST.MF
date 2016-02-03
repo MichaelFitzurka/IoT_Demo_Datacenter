@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1454491718219
+Bnd-LastModified: 1454505243131
 Build-Jdk: 1.8.0_71
 Built-By: psteiner
 Bundle-ManifestVersion: 2
