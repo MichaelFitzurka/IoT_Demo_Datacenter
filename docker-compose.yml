@@ -39,6 +39,6 @@ bpm:
         expose:
                - 8080
         ports:
-               - 8090:8080
+               - 8080:8080
         links:
                - receiver
