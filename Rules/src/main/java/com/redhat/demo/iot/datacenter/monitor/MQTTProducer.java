@@ -14,14 +14,14 @@ public class MQTTProducer {
 	MqttConnectOptions options;
 	MemoryPersistence persistence;
 	
-	public MQTTProducer(String brokerURL, String user, String password, String queueName) {
+	public MQTTProducer(String brokerURL, String user, String password, String clientID) {
 	
-		// MemoryPersistence persistence = new MemoryPersistence();
+		MemoryPersistence persistence = new MemoryPersistence();
 		
 		System.out.println("Connecting to "+brokerURL);
 		
 		try {
-			client = new MqttClient(brokerURL, "mqtt.temp.receiver");
+			client = new MqttClient(brokerURL, clientID, persistence);
 		} catch (MqttException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace(System.out);

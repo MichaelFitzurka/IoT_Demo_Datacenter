@@ -101,7 +101,7 @@ public class App
 		            
 		            
 		            	System.out.println("Need to turn on alarm light!");
-		            	MQTTProducer producer = new MQTTProducer(brokerURLMQTT, "admin", "change12_me", "mqtt.receiver");
+		            	MQTTProducer producer = new MQTTProducer(brokerURLMQTT, "admin", "change12_me", "rules_server");
 		            	producer.run("iotdemocommand/light", "an");
 		            	
 		            	System.out.println("Pushing this event to distributed Cache");
@@ -112,10 +112,7 @@ public class App
 							e.printStackTrace();
 						}
 	
-		            } else {
-		            	System.out.println("We already alerted this event, no need to do it again!");
-		            }
-		          
+		            } 
 
 	            } else {
 	            	System.out.println("No need to call BRMS, we know this already");

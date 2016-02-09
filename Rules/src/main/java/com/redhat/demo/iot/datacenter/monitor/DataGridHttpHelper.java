@@ -17,9 +17,9 @@ public class DataGridHttpHelper {
 	      String line = new String();
 	      StringBuilder stringBuilder = new StringBuilder();
 
-	      System.out.println("----------------------------------------");
-	      System.out.println("Executing GET");
-	      System.out.println("----------------------------------------");
+//	      System.out.println("----------------------------------------");
+//	      System.out.println("Executing GET");
+//	      System.out.println("----------------------------------------");
 
 	      URL address = new URL(urlServerAddress);
 	      System.out.println("executing request " + urlServerAddress);
@@ -37,11 +37,11 @@ public class DataGridHttpHelper {
 	         stringBuilder.append(line + '\n');
 	      }
 
-	      System.out.println("Executing get method of value: " + stringBuilder.toString());
-
-	      System.out.println("----------------------------------------");
-	      System.out.println(connection.getResponseCode() + " " + connection.getResponseMessage());
-	      System.out.println("----------------------------------------");
+//	      System.out.println("Executing get method of value: " + stringBuilder.toString());
+//
+//	      System.out.println("----------------------------------------");
+//	      System.out.println(connection.getResponseCode() + " " + connection.getResponseMessage());
+//	      System.out.println("----------------------------------------");
 
 	      connection.disconnect();
 
@@ -49,13 +49,19 @@ public class DataGridHttpHelper {
 	   }
 	
 	public void putMethod(String urlServerAddress, String value) throws IOException {
-	      System.out.println("----------------------------------------");
-	      System.out.println("Executing PUT");
-	      System.out.println("----------------------------------------");
+
+//		  System.out.println("----------------------------------------");
+//	      System.out.println("Executing PUT");
+//	      System.out.println("----------------------------------------");
+	      
 	      URL address = new URL(urlServerAddress);
-	      System.out.println("executing request " + urlServerAddress);
+	      
+//	      System.out.println("executing request " + urlServerAddress);
+	      
 	      HttpURLConnection connection = (HttpURLConnection) address.openConnection();
-	      System.out.println("Executing put method of value: " + value);
+	      
+	      System.out.println("Executing put method of value: <" + value+ "> for "+ urlServerAddress);
+	      
 	      connection.setRequestMethod("PUT");
 	      connection.setRequestProperty("Content-Type", "text/plain");
 	      connection.setDoOutput(true);
