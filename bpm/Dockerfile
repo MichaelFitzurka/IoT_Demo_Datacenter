@@ -39,8 +39,12 @@ RUN mv $HOME/tmp/index $HOME/.index
 RUN mkdir -p $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
 RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
 
+# unback and copy JBoss Data Grid modules
+RUN unzip $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library.zip
+RUN cp -R $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library/modules/* $HOME/$BPMHOME/modules
+
 # cleanup
-RUN rm $HOME/tmp/jboss-*
+RUN rm -rf $HOME/tmp/jboss-*
 
 # open ports
 EXPOSE 8080 9990

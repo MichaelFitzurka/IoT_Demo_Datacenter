@@ -28,8 +28,13 @@ public class BPMClient {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		params.put("process_variable", myData );
-
+		params.put("deviceType", myData.getDeviceType() );
+		params.put("deviceID", Integer.toString(myData.getDeviceID()) );
+		params.put("payload", Integer.toString(myData.getPayload()) );
+		params.put("timestamp", myData.getTimestamp() );
+		params.put("errorCode", Integer.toString(myData.getErrorCode()) );
+		params.put("errorMessage", myData.getErrorMessage() );
+		
 		ProcessInstance processInstance = kieSession.startProcess( definitionId, params );
 
 		long procId = processInstance.getId();

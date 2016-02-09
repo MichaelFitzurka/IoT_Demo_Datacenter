@@ -29,8 +29,9 @@ rules:
         links:
                - receiver
                - bpm
+               - jdg
         environment:
-               - mqttReceiverURL=192.168.42.1
+               - mqttBrokerURL=192.168.178.103
 
 
 bpm:
@@ -42,3 +43,13 @@ bpm:
                - 8080:8080
         links:
                - receiver
+               - jdg
+
+jdg:
+        build:  ./DataGrid
+        hostname: jdg
+        expose:
+               - 8080
+               - 11222
+        ports:
+               - 11222:11222
