@@ -1,5 +1,5 @@
 # DOCKER-VERSION 0.3.4
-FROM    centos:centos6
+FROM    psteiner/base
 
 MAINTAINER psteiner <psteiner@redhat.com>
 
@@ -8,14 +8,16 @@ ENV PGDATA /var/lib/pgsql/9.3/data
 ENV PGINST /usr/pgsql-9.3
 ENV HOME /home/postgres
 
+USER root
+
 ############################################################################
 # Install PostgreSQL 9.3
 #
 # Code taken from: https://github.com/DataVirtualizationByExample/DVWorkshop
 ###########################################################################
-RUN yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm
-RUN yum -y install postgresql93-server postgresql93-contrib phpPgAdmin sudo; yum clean all
-RUN service postgresql-9.3 initdb
+RUN yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm  && \
+    yum -y install postgresql93-server postgresql93-contrib phpPgAdmin sudo; yum clean all && \
+    service postgresql-9.3 initdb
 
 ############################################
 # Copy artifacts needed for the Heise_Demo
@@ -25,25 +27,25 @@ ADD . $HOME
 ############################################
 # lets give the user postgres a HOME-DIR
 ############################################
-USER root
 RUN usermod -d $HOME postgres
 
 #############################################
 # Create database for BPM-Suite BAM usage
 #############################################
 USER postgres
+WORKDIR /tmp
 
-RUN $PGINST/bin/pg_ctl start -w -D $PGDATA && \ 
+RUN $PGINST/bin/pg_ctl start -w -D $PGDATA && \
    $PGINST/bin/psql --command "ALTER USER postgres PASSWORD 'change12_me';" && \
    $PGINST/bin/psql --command "CREATE USER psteiner PASSWORD 'change12_me';" && \
-   $PGINST/bin/psql --command "CREATE DATABASE demo OWNER psteiner;" 
+   $PGINST/bin/psql --command "CREATE DATABASE demo OWNER psteiner;"
 
+
+USER root
 
 ############################################
 # Copy artifacts to where they belong
 ############################################
-USER root
-
 RUN mv $HOME/pgpass /root/.pgpass && \
    chmod 0600 /root/.pgpass && \
    chmod +x $HOME/postgresql-populate.sh  && \
@@ -52,11 +54,11 @@ RUN mv $HOME/pgpass /root/.pgpass && \
    mv $HOME/phpPgAdmin.conf /etc/httpd/conf.d/
 
 # Adjust PostgreSQL configuration so that remote connections to the
-# database are possible. 
+# database are possible.
 RUN echo "listen_addresses='*'" >> $PGDATA/postgresql.conf
 RUN echo "" >> $PGDATA/postgresql.conf
 
-EXPOSE 5432 80 
+EXPOSE 5432 80
 
 USER root
 
