@@ -21,37 +21,35 @@ public class App
 {
     private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
 	
-    private static final String DEFAULT_MQTT_BROKER	= "192.168.178.103";
-	
-    
-	public static String sourceBrokerURL = "tcp://receiver:61616";
-	public static String sourceQueueName = "message.to.rules";
-	 
+   
+   	 
     public static void main( String[] args ) throws InterruptedException, JMSException, JAXBException, MqttPersistenceException, MqttException
     {
-    	String				cacheValue=null;
-    	String 				messageFromQueue;
-    	String 				brokerURLMQTT = "tcp://" + System.getProperty("mqttBrokerURL",DEFAULT_MQTT_BROKER) +  ":1883";
+    	String	cacheValue=null;
+    	String 	messageFromQueue;
+    	String 	sourceAMQBroker  = System.getenv("SOURCE_AMQ_BROKER");
+    	String 	targetMQTTBroker = System.getenv("TARGET_MQTT_BROKER");
+    	String 	sourceQueue 	 = System.getenv("SOURCE_QUEUE");
+    	String  brokerUID		 = System.getenv("BROKER_ADMIN_UID");
+    	String  brokerPassword   = System.getenv("BROKER_ADMIN_PASSWD");
+    	
     	DataGridHttpHelper 	jdgHelper;
             	
     	System.out.println(" Check if remote AMQ-Broker are already available");
     	AMQTester tester = new AMQTester(); 
     	
-    	while( tester.testAvailability( sourceBrokerURL ) == false ) {
-    		System.out.println(" AMQ-Broker " + sourceBrokerURL + " not yet available ");
-    		Thread.sleep(10000);
-    	}
+    	tester.waitForBroker(sourceAMQBroker);
     	
-    	System.out.println(" AMQ-Broker " + sourceBrokerURL + " ready to work! ");
+    	System.out.println(" AMQ-Broker " + sourceAMQBroker + " ready to work! ");
     	
     	// Connecting to JBDG
     	jdgHelper = new DataGridHttpHelper();
 
-		Consumer consumer = new Consumer(sourceQueueName, sourceBrokerURL);
+		Consumer consumer = new Consumer(sourceQueue, sourceAMQBroker);
 	
 		BRMSServer brmsServer = new BRMSServer();
 		
-		while ( 1 ==1 ) {
+		while ( true ) {
 			messageFromQueue = consumer.run(20000);		
 			
 			if ( messageFromQueue != null ) {
@@ -63,7 +61,8 @@ public class App
 	            StringReader reader = new StringReader( messageFromQueue );
 	            DataSet event = (DataSet) unmarshaller.unmarshal(reader);
 		
-	            event.setRequired(0);	    
+	            event.setRequired(0);	
+	            event.setErrorCode(0);
 	            
 	            System.out.println("checking with cache if we know this event already.");
 	            
@@ -82,7 +81,7 @@ public class App
 	      	      	
 		            System.out.println("Rules Event-DeviceType <"+event.getDeviceType()+">");
 		                     
-		            if ( event.getRequired() == 1 ) {
+		            if ( event.getErrorCode() != 0 ) {
 		            	
 		            	System.out.println("Need to call BPM Process!");
 		            	
@@ -101,7 +100,7 @@ public class App
 		            
 		            
 		            	System.out.println("Need to turn on alarm light!");
-		            	MQTTProducer producer = new MQTTProducer(brokerURLMQTT, "admin", "change12_me", "rules_server");
+		            	MQTTProducer producer = new MQTTProducer(targetMQTTBroker, brokerUID, brokerPassword, "rules_server");
 		            	producer.run("iotdemocommand/light", "an");
 		            	
 		            	System.out.println("Pushing this event to distributed Cache");

@@ -25,14 +25,20 @@ receiver:
 
 rules:
         build: ./Rules
-        hostname: iotdatacenterrules
+        hostname: rules
         links:
                - receiver
                - bpm
                - jdg
         environment:
-               - mqttBrokerURL=192.168.178.103
-
+                - SOURCE_AMQ_BROKER=tcp://receiver:61616
+                - TARGET_MQTT_BROKER=tcp://192.168.178.103:1883
+                - SOURCE_QUEUE=message.to.rules
+                - TARGET_QUEUE=message.to.datacenter
+                - BROKER_ADMIN_UID=admin
+                - BROKER_ADMIN_PASSWD=change12_me
+        volumes:
+                - ./Rules/target:/home/psteiner/target
 
 bpm:
         build:  ./bpm
