@@ -16,9 +16,15 @@ cd monitor
 mvn clean install >>  $BUILD_LOGFILE
 popd > /dev/null
 
+echo "-- CEP Server deployable"
+pushd . > /dev/null
+cd Rules_CEP
+mvn clean install >>  $BUILD_LOGFILE
+popd > /dev/null
+
 echo "-- Rules Server deployable"
 pushd . > /dev/null
-cd rules
+cd Rules
 mvn clean install >>  $BUILD_LOGFILE
 popd > /dev/null
 
