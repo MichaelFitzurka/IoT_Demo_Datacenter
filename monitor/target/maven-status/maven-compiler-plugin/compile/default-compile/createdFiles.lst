@@ -1,7 +1,0 @@
-com/redhat/demo/iot/datacenter/monitor/Producer.class
-com/redhat/demo/iot/datacenter/monitor/AMQTester.class
-com/redhat/demo/iot/datacenter/monitor/BRMSServer.class
-com/redhat/demo/iot/datacenter/monitor/App.class
-com/redhat/demo/iot/datacenter/monitor/BPMClient.class
-com/redhat/demo/iot/datacenter/monitor/Consumer.class
-com/redhat/demo/iot/datacenter/monitor/DataSet.class
