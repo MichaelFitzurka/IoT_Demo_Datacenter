@@ -10,21 +10,15 @@ cd receiver
 mvn clean install >>  $BUILD_LOGFILE
 popd > /dev/null
 
-echo "-- iot_datacenter_monitor"
-pushd . > /dev/null
-cd monitor
-mvn clean install >>  $BUILD_LOGFILE
-popd > /dev/null
-
-echo "-- CEP Server deployable"
-pushd . > /dev/null
-cd Rules_CEP
-mvn clean install >>  $BUILD_LOGFILE
-popd > /dev/null
-
 echo "-- Rules Server deployable"
 pushd . > /dev/null
 cd Rules
+mvn clean install >>  $BUILD_LOGFILE
+popd > /dev/null
+
+echo "-- BPM WorkItemHandler deployable"
+pushd . > /dev/null
+cd bpm/LightWorkItemHandler
 mvn clean install >>  $BUILD_LOGFILE
 popd > /dev/null
 
