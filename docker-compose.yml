@@ -15,12 +15,14 @@ receiver:
                 - 8181
                 - 61616
         ports:
-                - "10003:8181"
+                - "8181:8181"
                 - "61616:61616"
         links:
                 - postgres
         environment:
-                - SmartGatewayActiveMQBroker="192.168.42.1:4711"
+                - GATEWAY_JMS_BROKER_URL=tcp://192.168.178.118:61616
+                - BROKER_ADMIN_UID=admin
+                - BROKER_ADMIN_PASSWD=change12_me
 
 
 rules:
@@ -32,7 +34,7 @@ rules:
                - jdg
         environment:
                 - SOURCE_AMQ_BROKER=tcp://receiver:61616
-                - TARGET_MQTT_BROKER=tcp://192.168.178.103:1883
+                - TARGET_MQTT_BROKER=tcp://192.168.178.118:1883
                 - SOURCE_QUEUE=message.to.rules
                 - TARGET_QUEUE=message.to.datacenter
                 - BROKER_ADMIN_UID=admin

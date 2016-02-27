@@ -4,7 +4,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
 
-ENV BUNDLE_NAME datacenter_receiver-1.0.0-SNAPSHOT.jar
+ENV BUNDLE_NAME receiver-1.0.0-SNAPSHOT.jar
 ENV BROKER_NAME iotdatacenterreceiver
 
 # copy required ( or not ) configurations
@@ -16,7 +16,7 @@ ADD Docker_Files/scripts/install.sh $HOME/tmp/
 # copy deployable
 # ADD src $HOME/tmp/src/
 # ADD pom.xml $HOME/tmp/
-ADD target/datacenter_receiver-1.0.0-SNAPSHOT.jar $HOME/tmp/
+ADD target/receiver-1.0.0-SNAPSHOT.jar $HOME/tmp/
 
 # let the user 'psteiner' own the files
 RUN chown -R psteiner:psteiner $HOME
