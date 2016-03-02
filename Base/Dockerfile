@@ -23,8 +23,9 @@ RUN ln -s /opt/maven/bin/mvn /usr/bin/mvn
 RUN rm apache-maven-3.2.5-bin.zip
 
 
+
 # Create user to run processed
-RUN useradd -m -d /home/psteiner -p psteiner psteiner 
+RUN useradd -u 1000 -g 50 -m -d /home/psteiner -p psteiner psteiner 
 
 # Switch to new user
 USER psteiner
@@ -39,7 +40,7 @@ ADD config/settings.xml $HOME/.m2/
 # as ADD always uses root as user, we have to give
 # the file back to 'psteiner'
 USER root
-RUN chown -R psteiner:psteiner $HOME/.m2/*
+RUN chown -R psteiner $HOME/.m2/*
 USER psteiner
 
 # lets create a volume to mount the external maven repo

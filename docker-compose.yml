@@ -20,9 +20,11 @@ receiver:
         links:
                 - postgres
         environment:
-                - GATEWAY_JMS_BROKER_URL=tcp://192.168.178.118:61616
+                - GATEWAY_JMS_BROKER_URL=tcp://192.168.42.1:61616
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
 
 
 rules:
@@ -34,13 +36,14 @@ rules:
                - jdg
         environment:
                 - SOURCE_AMQ_BROKER=tcp://receiver:61616
-                - TARGET_MQTT_BROKER=tcp://192.168.178.118:1883
+                - TARGET_MQTT_BROKER=tcp://192.168.42.1:1883
                 - SOURCE_QUEUE=message.to.rules
                 - TARGET_QUEUE=message.to.datacenter
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
         volumes:
                 - ./Rules/target:/home/psteiner/target
+                - ~/.m2/repository:/home/psteiner/.m2/repository
 
 bpm:
         build:  ./bpm
@@ -52,6 +55,8 @@ bpm:
         links:
                - receiver
                - jdg
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
 
 jdg:
         build:  ./DataGrid
@@ -61,3 +66,5 @@ jdg:
                - 11222
         ports:
                - 11222:11222
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository

@@ -16,7 +16,7 @@ ADD Docker_Files/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/tmp/
 ADD LightWorkItemHandler/target/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/tmp/
 
 # let the user 'psteiner' own the files
-RUN chown -R psteiner:psteiner $HOME
+RUN chown -R psteiner $HOME
 
 # continue as 'psteiner'
 USER psteiner

@@ -21,22 +21,22 @@ ADD Docker_Files/scripts/install.sh $HOME/tmp/
 ADD Docker_Files/scripts/run.sh $HOME/
 
 # let the user 'psteiner' own the files
-RUN chown -R psteiner:psteiner $HOME
+RUN chown -R psteiner $HOME
 
 # continue as 'psteiner'
 USER psteiner
 
-RUN chmod +x $HOME/tmp/install.sh
-RUN chmod +x $HOME/run.sh
+RUN chmod +x $HOME/tmp/install.sh && \
+    chmod +x $HOME/run.sh
 
 # extract
-RUN unzip $HOME/tmp/$FUSE_INSTALL_IMAGE
-RUN mv $HOME/$FUSE_INSTALL_DIR $HOME/$FUSE_LOCATION
+RUN unzip $HOME/tmp/$FUSE_INSTALL_IMAGE && \
+    mv $HOME/$FUSE_INSTALL_DIR $HOME/$FUSE_LOCATION
 
 # remove some overhead
-RUN rm -rf $HOME/tmp/$FUSE_INSTALL_IMAGE
-RUN rm -rf $HOME/$FUSE_LOCATION/extras
-RUN rm -rf $HOME/$FUSE_LOCATION/quickstarts
+RUN rm -rf $HOME/tmp/$FUSE_INSTALL_IMAGE && \
+    rm -rf $HOME/$FUSE_LOCATION/extras && \
+    rm -rf $HOME/$FUSE_LOCATION/quickstarts
 
 # run the helper_install script
 # RUN $HOME/tmp/install.sh

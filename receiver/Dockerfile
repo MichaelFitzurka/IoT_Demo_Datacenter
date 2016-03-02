@@ -19,13 +19,13 @@ ADD Docker_Files/scripts/install.sh $HOME/tmp/
 ADD target/receiver-1.0.0-SNAPSHOT.jar $HOME/tmp/
 
 # let the user 'psteiner' own the files
-RUN chown -R psteiner:psteiner $HOME
+RUN chown -R psteiner $HOME
 
 # continue as 'psteiner'
 USER psteiner
 
-RUN chmod +x $HOME/tmp/install.sh
-RUN chmod +x $HOME/run.sh
+RUN chmod +x $HOME/tmp/install.sh && \
+    chmod +x $HOME/run.sh
 
 # run the helper_install script
 WORKDIR $HOME/tmp
