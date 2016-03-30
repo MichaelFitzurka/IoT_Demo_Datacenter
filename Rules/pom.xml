@@ -66,6 +66,12 @@
       		<version>${version.org.kie}</version>
     	</dependency>
   
+  		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>drools-decisiontables</artifactId>
+			<version>${version.org.kie}</version>
+		</dependency>
+  
   		<!-- activeMQ dependencies. -->
 	    <dependency>
 	  		<groupId>javax.jms</groupId>
