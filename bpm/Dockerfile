@@ -26,18 +26,19 @@ RUN unzip $HOME/tmp/jboss-eap* -d $HOME
 RUN unzip -o $HOME/tmp/jboss-bpm* -d $HOME
 
 # copy configurations to their place
-RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration
-RUN mv $HOME/tmp/kie-wb-deployment-descriptor.xml $HOME/$BPMHOME/standalone/deployments/business-central.war/WEB-INF/classes/META-INF
+RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration  && \
+    mv $HOME/tmp/kie-wb-deployment-descriptor.xml $HOME/$BPMHOME/standalone/deployments/business-central.war/WEB-INF/classes/META-INF
 
 # copy process to the right place
-RUN mv $HOME/tmp/niogit $HOME/.niogit
-RUN mv $HOME/tmp/repositories $HOME/repositories
-RUN mv $HOME/tmp/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/
-RUN mv $HOME/tmp/index $HOME/.index
+RUN mv $HOME/tmp/niogit $HOME/.niogit  && \
+    mv $HOME/tmp/repositories $HOME/repositories  && \
+    mv $HOME/tmp/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/  && \
+    mv $HOME/tmp/index $HOME/.index
 
 # copy custom WorkItemHandler
 RUN mkdir -p $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
-RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
+# RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
+RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/$BPMHOME/standalone/deployments/business-central.war/WEB-INF/lib/
 
 # unback and copy JBoss Data Grid modules
 RUN unzip $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library.zip
