@@ -5,6 +5,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 USER root
 
 ENV BPMHOME jboss-eap-6.4
+ENV JBOSS_PATCH jboss-eap-6.4.6-patch.zip
 
 # transfer JBoss products & config files
 ADD Docker_Files/software/ $HOME/tmp/
@@ -22,8 +23,12 @@ RUN chown -R psteiner $HOME
 USER psteiner
 
 # unpack and install BPM
-RUN unzip $HOME/tmp/jboss-eap* -d $HOME
-RUN unzip -o $HOME/tmp/jboss-bpm* -d $HOME
+RUN unzip $HOME/tmp/jboss-eap-6.4.0.zip -d $HOME && \
+    unzip -o $HOME/tmp/jboss-bpm* -d $HOME
+
+# patch JBoss EAP
+WORKDIR $HOME/jboss-eap-6.4
+RUN ./bin/jboss-cli.sh "patch apply $HOME/tmp/$JBOSS_PATCH"
 
 # copy configurations to their place
 RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration  && \
@@ -36,21 +41,20 @@ RUN mv $HOME/tmp/niogit $HOME/.niogit  && \
     mv $HOME/tmp/index $HOME/.index
 
 # copy custom WorkItemHandler
-RUN mkdir -p $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
-# RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/
-RUN mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/$BPMHOME/standalone/deployments/business-central.war/WEB-INF/lib/
+RUN mkdir -p $HOME/.m2/repository/com/redhat/demo/iotdemo/lightWorkItemHandler/1.0.0-SNAPSHOT/ && \
+    mv $HOME/tmp/lightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/$BPMHOME/standalone/deployments/business-central.war/WEB-INF/lib/
 
-# unback and copy JBoss Data Grid modules
-RUN unzip $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library.zip
+# unpack and copy JBoss Data Grid modules
+RUN unzip $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library.zip -d $HOME/tmp
 RUN cp -R $HOME/tmp/jboss-datagrid-6.6.0-eap-modules-library/modules/* $HOME/$BPMHOME/modules
 
 # cleanup
 RUN rm -rf $HOME/tmp/jboss-*
 
+WORKDIR $HOME
+
 # open ports
 EXPOSE 8080 9990
-
-WORKDIR $HOME
 
 # ENTRYPOINT
 CMD $HOME/$BPMHOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 -Dorg.kie.override.deploy.enabled=true
