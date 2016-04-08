@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 public class DataSet {
 	private String	timestamp;
 	private String	deviceType;
-	private int		deviceID;	
+	private String	deviceID;	
 	private int		count;
 	private	int		payload;
 	private int		required;
@@ -18,13 +18,13 @@ public class DataSet {
 	{
 		this.timestamp 	= "";
 		this.deviceType = "";
-		this.deviceID	= 0;
+		this.deviceID	= "";
 		this.count		= 0;
 		this.payload	= 0;
 		this.required	= 0;
 	}
 	
-	public DataSet(String time, String devType, int devID, int count, int pay, int required)
+	public DataSet(String time, String devType, String devID, int count, int pay, int required)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -79,14 +79,14 @@ public class DataSet {
 	/**
 	 * @return the deviceID
 	 */
-	public int getDeviceID() {
+	public String getDeviceID() {
 		return deviceID;
 	}
 
 	/**
 	 * @param deviceID the deviceID to set
 	 */
-	public void setDeviceID(int deviceID) {
+	public void setDeviceID(String deviceID) {
 		this.deviceID = deviceID;
 	}
 

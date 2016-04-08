@@ -27,7 +27,8 @@ receiver:
                 - BROKER_ADMIN_PASSWD=change12_me
         privileged: true
         volumes:
-               - ~/.m2/repository:/home/psteiner/.m2/repository
+                - ./receiver/target:/home/psteiner/target
+                - ~/.m2/repository:/home/psteiner/.m2/repository
 
 
 rules:
