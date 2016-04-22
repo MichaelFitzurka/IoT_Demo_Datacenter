@@ -17,7 +17,9 @@ do
    $HOME/$FUSE_LOCATION/bin/status
 done
 
-sleep 10
+echo "waiting for 5 minutes, until I found a more clever way to check if Fuse is running"
+
+sleep 300
 
 echo "Now let's deploy the bundle and some prereqs"
 echo "commons-dbcp"

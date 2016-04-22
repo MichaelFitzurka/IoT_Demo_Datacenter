@@ -14,11 +14,6 @@ ADD Docker_Files/config/activemq.xml $HOME/tmp/
 ADD Docker_Files/scripts/install.sh $HOME/tmp/
 ADD Docker_Files/scripts/run.sh $HOME/
 
-# copy deployable
-# ADD src $HOME/tmp/src/
-# ADD pom.xml $HOME/tmp/
-ADD target/receiver-1.0.0-SNAPSHOT.jar $HOME/tmp/
-
 # let the user 'psteiner' own the files
 RUN chown -R psteiner $HOME
 
