@@ -37,8 +37,7 @@
         <property name="defaultAutoCommit" value="false" />
     </bean>
 
-    <bean id="dataToSQL" class="com.redhat.demo.iot.datacenter.receiver.DataToSQLBean">
-    </bean>
+    <bean id="dataToSQL" class="com.redhat.demo.iot.datacenter.receiver.DataToSQLBean"/>
 
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 
@@ -100,8 +99,8 @@
   <route id="backToSmartGateway">
     <from uri="jetty:http://0.0.0.0:4711/lightsOff?matchOnUriPrefix=true"/>
     <log message="Received message to be forwarded to Gateway"/>
-    <log message="${body}"/>
     <process ref="myJettyProcessor"/>
+    <log message="${body}"/>
     <to pattern="OutOnly" uri="smartGatewayAMQ:queue:message.from.datacenter"/>
   </route>
 </camelContext>
