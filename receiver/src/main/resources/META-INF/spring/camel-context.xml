@@ -98,9 +98,8 @@
   </route>
   <route id="backToSmartGateway">
     <from uri="jetty:http://0.0.0.0:4711/lightsOff?matchOnUriPrefix=true"/>
-    <log message="Received message to be forwarded to Gateway"/>
     <process ref="myJettyProcessor"/>
-    <log message="${body}"/>
+    <log message="Received message to be forwarded to Gateway: ${body} "/>
     <to pattern="OutOnly" uri="smartGatewayAMQ:queue:message.from.datacenter"/>
   </route>
 </camelContext>

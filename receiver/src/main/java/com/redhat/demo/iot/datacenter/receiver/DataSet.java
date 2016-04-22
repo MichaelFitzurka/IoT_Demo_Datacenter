@@ -22,9 +22,10 @@ public class DataSet {
 		this.count		= 0;
 		this.payload	= 0;
 		this.required	= 0;
+		this.average	= 0;
 	}
 	
-	public DataSet(String time, String devType, String devID, int count, int pay, int required)
+	public DataSet(String time, String devType, String devID, int count, int pay, int required, int av)
 	{
 		this.timestamp 	= time;
 		this.deviceType = devType;
@@ -32,6 +33,7 @@ public class DataSet {
 		this.count		= count;
 		this.payload	= pay;
 		this.required	= required;
+		this.average	= av;
 	}
 
 	/**
