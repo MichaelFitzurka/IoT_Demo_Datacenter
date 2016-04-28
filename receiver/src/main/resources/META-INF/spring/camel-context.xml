@@ -17,16 +17,6 @@
         </property>
     </bean>
 
-    <bean id="smartGatewayAMQ" class="org.apache.activemq.camel.component.ActiveMQComponent" >
-        <property name="connectionFactory">
-          <bean class="org.apache.activemq.ActiveMQConnectionFactory">
-            <property name="brokerURL" value="${GATEWAY_JMS_BROKER_URL}" />
-            <property name="userName" value="${BROKER_ADMIN_UID}"/>
-            <property name="password" value="${BROKER_ADMIN_PASSWD}"/>
-          </bean>
-        </property>
-    </bean>
-
 	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
         <property name="url" value="jdbc:postgresql://postgres:5432/demo" />
@@ -100,7 +90,7 @@
     <from uri="jetty:http://0.0.0.0:4711/lightsOff?matchOnUriPrefix=true"/>
     <process ref="myJettyProcessor"/>
     <log message="Received message to be forwarded to Gateway: ${body} "/>
-    <to pattern="OutOnly" uri="smartGatewayAMQ:queue:message.from.datacenter"/>
+    <to pattern="InOnly" uri="activemq:queue:message.back.to.gateway"/>
   </route>
 </camelContext>
 

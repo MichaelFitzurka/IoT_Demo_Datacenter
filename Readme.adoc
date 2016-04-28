@@ -93,15 +93,7 @@ Please do open the file 'docker-compose.yml' in your favorite editor and change 
 entries which define the environment variables for the messaging broker IP addresses and
 ports
 
-1. In section `receiver`:
-
-  ** `GATEWAY_JMS_BROKER_URL` is the fully qualified URL for the ActiveMQ Broker running on the Gateway.
-
-  ** `BROKER_ADMIN_UID` the user-id of the user which authenticates at the Gateway. In the demo-setup this will usually be `admin`
-
-  ** `BROKER_ADMIN_PASSWD` the password for the user. This will usually be `change12_me` in the default demo setup.
-
-2. In section `rules`
+* In section `rules`
 
   ** `SOURCE_AMQ_BROKER` is the fully qualified URL for the ActiveMQ Broker from which Rules will receive messages. You will usually be able to leave this as it is.
   ** `TARGET_MQTT_BROKER` is the fully qualified URL for the MQTT Broker where Rules will deliver messages. This is usually the ip-address of your Gateway.
