@@ -78,3 +78,16 @@ jdg:
         privileged: true
         volumes:
                - ~/.m2/repository:/home/psteiner/.m2/repository
+
+zeppelin:
+        build: ./zeppelin
+        hostname: zeppelin
+        expose:
+               - 8080
+        ports:
+               - 7070:8080
+        links:
+               - postgres
+        privileged: true
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
