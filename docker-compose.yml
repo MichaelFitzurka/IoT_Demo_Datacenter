@@ -80,7 +80,7 @@ jdg:
                - ~/.m2/repository:/home/psteiner/.m2/repository
 
 zeppelin:
-        build: ./zeppelin
+        build: ./Zeppelin
         hostname: zeppelin
         expose:
                - 8080
