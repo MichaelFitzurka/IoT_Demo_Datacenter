@@ -2,8 +2,8 @@ FROM    psteiner/base
 
 MAINTAINER psteiner <psteiner@redhat.com>
 
-ENV FUSE_INSTALL_IMAGE jboss-fuse-full-6.2.1.redhat-084.zip
-ENV FUSE_INSTALL_DIR jboss-fuse-6.2.1.redhat-084
+ENV FUSE_INSTALL_IMAGE jboss-fuse-karaf-6.3.0.redhat-187.zip
+ENV FUSE_INSTALL_DIR jboss-fuse-6.3.0.redhat-187
 ENV FUSE_LOCATION fuse
 
 USER root

@@ -35,7 +35,7 @@ The Datacenter is build based on the following technologies
 * Intel X86
 * Any system capable of running Docker. I'm using a Macbook with https://docs.docker.com/machine/install-machine/[docker-machine]
 * Docker-Compose available on the docker-host
-* https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=41301[JBoss Fuse] for the required messaging and integration capabilities.
+* https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=48541[JBoss Fuse] for the required messaging and integration capabilities.
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=41161[JBoss BPM Suite] for the process management
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=42191[JBoss DataGrid] to hot-store information
 
@@ -71,7 +71,7 @@ After cloning the repo, you will have to download and put
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=37393[JBoss EAP V6.4.0] into directory `./IoT_Demo_Datacenter/bpm/Docker_Files/software/`
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=42471&product=appplatform[JBoss EAP V6.4.6-patch] into directory `./IoT_Demo_Datacenter/bpm/Docker_Files/software/`
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=41161[JBoss BPM Suite] into directory `./IoT_Demo_Datacenter/bpm/Docker_Files/software/`
-* https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=41311[JBoss Fuse on Karaf] into directory `./IoT_Demo_Datacenter/Fuse/Docker_Files/software/`
+* https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=48541[JBoss Fuse on Karaf] into directory `./IoT_Demo_Datacenter/Fuse/Docker_Files/software/`
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=42191[JBoss DataGrid] into directory `./IoT_Demo_Datacenter/DataGrid/Docker_Files/software/`
 * https://access.redhat.com/jbossnetwork/restricted/softwareDownload.html?softwareId=42331[JBoss Data Grid 6.6.0 Library Module for JBoss EAP 6] into directory `./IoT_Demo_Datacenter/bpm/Docker_Files/software/`
 
