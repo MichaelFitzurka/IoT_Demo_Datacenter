@@ -15,8 +15,6 @@ ADD Docker_Files/software/ $HOME/tmp/
 ADD Docker_Files/config/ $HOME/tmp/
 ADD Docker_Files/niogit $HOME/tmp/niogit/
 ADD Docker_Files/repositories $HOME/tmp/repositories/
-ADD Docker_Files/index $HOME/tmp/index/
-ADD Docker_Files/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/tmp/
 ADD LightWorkItemHandler/target/LightWorkItemHandler-1.0.0-SNAPSHOT.jar $HOME/tmp/
 
 RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
@@ -40,9 +38,7 @@ RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration
 
 # copy process to the right place
 RUN mv $HOME/tmp/niogit $HOME/.niogit && \
-    mv $HOME/tmp/repositories $HOME/repositories && \
-    mv $HOME/tmp/15ad5bfa-7532-3eea-940a-abbbbc89f1e8.xml $HOME/ && \
-    mv $HOME/tmp/index $HOME/.index
+    mv $HOME/tmp/repositories $HOME/repositories
 
 # copy custom WorkItemHandler
 RUN mkdir -p $HOME/.m2/repository/com/redhat/demo/iotdemo/LightWorkItemHandler/1.0.0-SNAPSHOT/ && \
