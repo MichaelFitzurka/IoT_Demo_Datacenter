@@ -88,11 +88,11 @@ public class App
 		            	try {
 		            		BPMClient bpmClient = new BPMClient();
 			
-		            		bpmClient.doCall("http://bpm:8080/business-central", 
-			            				     "com.redhat.demo.iot.datacenter:HumanTask:1.0",
-			            				     "IoT_Human_Task.low_voltage",
-			            				     "psteiner", "change12_me",
-			            				     event);
+		            		bpmClient.doCall("http://104.155.37.167:8080/business-central",
+        				     "org.jbpm:IoTEvent:1.0",
+        				     "IoTProcesses.IoTEvent",
+        				     "psteiner", "change12_me",
+        				     event);
 		            		
 		            	} catch (Exception ex) {
 		            		System.out.println("Exception when calling BPMSuite");
