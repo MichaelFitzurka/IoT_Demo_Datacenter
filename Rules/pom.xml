@@ -19,9 +19,9 @@
       <maven.compiler.target>1.6</maven.compiler.target>
       <maven.compiler.source>1.6</maven.compiler.source>
 
-      <version.org.kie>6.4.0.Final</version.org.kie>
-
+      <version.org.kie>6.5.0.Final-redhat-5</version.org.kie>
       <version.org.infinispan>6.4.0.Final-redhat-4</version.org.infinispan>
+
   </properties>
 
    <repositories>
