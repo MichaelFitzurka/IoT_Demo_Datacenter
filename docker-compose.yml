@@ -63,6 +63,7 @@ bpm:
         links:
                - receiver
                - jdg
+               - nexus3
         privileged: true
         volumes:
                - ~/.m2/repository:/home/psteiner/.m2/repository
@@ -91,3 +92,12 @@ zeppelin:
         privileged: true
         volumes:
                - ~/.m2/repository:/home/psteiner/.m2/repository
+
+nexus3:
+       image: sonatype/nexus:latest
+       hostname: nexus3
+       expose:
+               - 8081
+       ports:
+               - 8081:8081
+       privileged: true

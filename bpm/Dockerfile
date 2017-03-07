@@ -34,7 +34,8 @@ WORKDIR $HOME/$BPMHOME
 RUN ./bin/jboss-cli.sh "patch apply $HOME/tmp/$JBOSS_PATCH"
 
 # copy configurations to their place
-RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration
+RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration && \
+    mv $HOME/tmp/settings-security.xml $HOME/.m2/
 
 # copy process to the right place
 RUN mv $HOME/tmp/niogit $HOME/.niogit && \
