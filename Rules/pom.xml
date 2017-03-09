@@ -25,17 +25,18 @@
   </properties>
 
    <repositories>
-    	<repository>
-			  <id>jboss-ga-repository</id>
-	          <url>http://maven.repository.redhat.com/techpreview/all</url>
-	          <releases>
-	            	<enabled>true</enabled>
-	          </releases>
-	          <snapshots>
-	            	<enabled>false</enabled>
-	          </snapshots>
-	    </repository>
-	    <repository>
+		<repository>
+			<id>jboss-ga-repository</id>
+			<url>http://maven.repository.redhat.com/techpreview/all</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
+		 <repository>
 	          <id>jboss-public-repository</id>
 	          <url>http://repository.jboss.org/nexus/content/repositories/public/</url>
 	          <releases>
@@ -45,13 +46,19 @@
 	            	<enabled>false</enabled>
 	          </snapshots>
         </repository>
-        <repository>
-		    <id>paho-mqtt-client</id>
-		    <name>Paho MQTT Client</name>
-		    <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
-		</repository>
- 	</repositories>
 
+	    <repository>
+	    	<releases>
+	        	<enabled>true</enabled>
+	        	<updatePolicy>always</updatePolicy>
+	      </releases>
+          <id>iot-rules-repo</id>
+          <name>IoT Rules Repo</name>
+          <url>http://52.42.245.231:8081/nexus/content/repositories/releases</url>
+       </repository>
+
+	</repositories>
+	
   <dependencies>
   		<dependency>
 			<groupId>org.jbpm</groupId>
@@ -59,17 +66,30 @@
 			<version>${version.org.kie}</version>
 		</dependency>
 
-  		<!-- BPM dependencies -->
+  		<!-- BRMS dependencies -->
   		<dependency>
+            <groupId>org.drools</groupId>
+            <artifactId>drools-workbench-models-guided-dtable</artifactId>
+            <version>${version.org.kie}</version>
+        </dependency>     
+              
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-kie-services</artifactId>
+			<version>${version.org.kie}</version>
+		</dependency>
+
+		<!-- BPM dependencies -->
+		<dependency>
       		<groupId>org.kie.remote</groupId>
       		<artifactId>kie-remote-client</artifactId>
-      		<version>${version.org.kie}</version>
-    	</dependency>
+     		<version>${version.org.kie}</version>
+     	</dependency>
 
-  		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-decisiontables</artifactId>
-			<version>${version.org.kie}</version>
+		<dependency>
+			<groupId>org.eclipse.paho</groupId>
+			<artifactId>mqtt-client</artifactId>
+			<version>0.4.0</version>
 		</dependency>
 
   		<!-- activeMQ dependencies. -->
@@ -82,13 +102,6 @@
 	  		<groupId>org.apache.activemq</groupId>
 	 		<artifactId>activemq-all</artifactId>
 	  		<version>5.9.0</version>
-		</dependency>
-
-		<!--  MQTT dependencies  -->
-		<dependency>
-		   <groupId>org.eclipse.paho</groupId>
-		   <artifactId>mqtt-client</artifactId>
-		   <version>0.4.0</version>
 		</dependency>
 
 		 <!-- Import the infinispan core -->
@@ -106,6 +119,14 @@
             <version>${version.org.infinispan}</version>
             <scope>compile</scope>
         </dependency>
+        
+        <!-- Import rule-set from BRMS provided -->
+        <dependency>
+			<groupId>RedHat</groupId>
+			<artifactId>BusinessRules</artifactId>
+			<version>LATEST</version>
+		</dependency>
+        
   </dependencies>
 
   <build>
