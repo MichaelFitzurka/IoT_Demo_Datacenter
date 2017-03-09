@@ -19,7 +19,7 @@ import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
 public class App
 {
-    private static final Logger log = Logger.getLogger(BRMSRunner.class.getName());
+    private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
 
 
 
@@ -47,7 +47,7 @@ public class App
 
 		Consumer consumer = new Consumer(sourceQueue, sourceAMQBroker);
 
-		BRMSRunner brmsServer = new BRMSRunner();
+		BRMSServer brmsServer = new BRMSServer();
 
 		while ( true ) {
 			messageFromQueue = consumer.run(20000);
@@ -77,7 +77,7 @@ public class App
 
 	            if ( ( cacheValue == null ) || ( cacheValue.contains("solved")) ) {
 
-	            	event = brmsServer.fireRules( event);
+	            	event = brmsServer.insert( event);
 
 		            System.out.println("Rules Event-DeviceType <"+event.getDeviceType()+">");
 

@@ -80,7 +80,7 @@
 				<releases>
 					<enabled>true</enabled>
 				</releases>
-			</repository>
+			</repository>    
 			<repository>
 				<id>snapshot.fusesource.org</id>
 				<name>FuseSource Snapshot Repository</name>
@@ -115,7 +115,7 @@
 				<releases>
 					<enabled>true</enabled>
 				</releases>
-			</pluginRepository>
+			</pluginRepository>      
 				<pluginRepository>
 				<id>snapshot.fusesource.org</id>
 				<name>FuseSource Snapshot Repository</name>
@@ -127,22 +127,14 @@
 					<enabled>false</enabled>
 				</releases>
 			</pluginRepository>
-		</pluginRepositories>
+		</pluginRepositories>	
 	</profile>
 </profiles>
-
-<servers>
-  <server>
-    <id>deployment</id>
-    <username>admin</username>
-    <password>{UHS70eOgD0wHiGcRnlEDNA4A0FZmLdL+2BGA/+rs7Fg=}</password>
-  </server>
-</servers>
 
   <activeProfiles>
     <!-- Optionally, make the repositories active by default -->
 	<activeProfile>redhat-techpreview</activeProfile>
-	<activeProfile>redhat-techpreview</activeProfile>
+	<activeProfile>redhat-techpreview</activeProfile>    
 </activeProfiles>
 
 </settings>
