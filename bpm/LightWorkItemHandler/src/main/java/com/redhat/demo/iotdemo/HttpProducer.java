@@ -17,7 +17,8 @@ public class HttpProducer {
 
 		// optional default is GET
 		con.setRequestMethod("GET");
-
+		con.setInstanceFollowRedirects( false );
+		
 		//add request header
 		con.setRequestProperty("User-Agent", USER_AGENT);
 

@@ -15,12 +15,20 @@ receiver:
                 - 8181
                 - 61616
         ports:
-                - "10003:8181"
+                - "8181:8181"
                 - "61616:61616"
         links:
                 - postgres
         environment:
-                - SmartGatewayActiveMQBroker="192.168.42.1:4711"
+                # URL of Broker on Gateway
+                - GATEWAY_JMS_BROKER_URL=tcp://192.168.42.1:61616
+                # - GATEWAY_JMS_BROKER_URL=tcp://192.168.178.116:61616
+                - BROKER_ADMIN_UID=admin
+                - BROKER_ADMIN_PASSWD=change12_me
+        privileged: true
+        volumes:
+                - ./receiver/target:/home/psteiner/target
+                - ~/.m2/repository:/home/psteiner/.m2/repository
 
 
 rules:
@@ -31,30 +39,19 @@ rules:
                - bpm
                - jdg
         environment:
+                # URL of Broker for Datacenter. Usually no need to change this
                 - SOURCE_AMQ_BROKER=tcp://receiver:61616
-                - TARGET_MQTT_BROKER=tcp://192.168.178.103:1883
+                # URL of Broker on Gateway
+                - TARGET_MQTT_BROKER=tcp://192.168.42.1:1883
+                # - TARGET_MQTT_BROKER=tcp://192.168.178.116:1883
                 - SOURCE_QUEUE=message.to.rules
                 - TARGET_QUEUE=message.to.datacenter
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
+        privileged: true
         volumes:
                 - ./Rules/target:/home/psteiner/target
-
-rulescep:
-       build: ./Rules_CEP
-       hostname: rulescep
-       links:
-                - receiver
-       environment:
-                - SOURCE_AMQ_BROKER=tcp://receiver:61616
-                - TARGET_AMQ_BROKER=tcp://receiver:61616
-                - SOURCE_QUEUE=message.to.rules_cep
-                - TARGET_QUEUE=message.to.datacenter
-                - BROKER_ADMIN_UID=admin
-                - BROKER_ADMIN_PASSWD=change12_me
-       volumes:
-                - ./Rules_CEP/target:/home/psteiner/target
-
+                - ~/.m2/repository:/home/psteiner/.m2/repository
 
 bpm:
         build:  ./bpm
@@ -66,6 +63,10 @@ bpm:
         links:
                - receiver
                - jdg
+               - nexus3
+        privileged: true
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
 
 jdg:
         build:  ./DataGrid
@@ -75,3 +76,28 @@ jdg:
                - 11222
         ports:
                - 11222:11222
+        privileged: true
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
+
+zeppelin:
+        build: ./Zeppelin
+        hostname: zeppelin
+        expose:
+               - 8080
+        ports:
+               - 7070:8080
+        links:
+               - postgres
+        privileged: true
+        volumes:
+               - ~/.m2/repository:/home/psteiner/.m2/repository
+
+nexus3:
+       image: sonatype/nexus:latest
+       hostname: nexus3
+       expose:
+               - 8081
+       ports:
+               - 8081:8081
+       privileged: true

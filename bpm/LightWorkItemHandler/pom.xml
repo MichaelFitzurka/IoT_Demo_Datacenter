@@ -6,83 +6,95 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.redhat.demo.iotdemo</groupId>
-  <artifactId>lightWorkItemHandler</artifactId>
+  <artifactId>LightWorkItemHandler</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <properties>
-    <jbpm.version>6.2.0.Final-redhat-9</jbpm.version>
-    <version.org.infinispan>6.3.1.Final-redhat-1</version.org.infinispan>
+    <jbpm.version>6.5.0.Final-redhat-5</jbpm.version>
+    <version.org.infinispan>8.3.0.Final-redhat-1</version.org.infinispan>
+    <jdg.slot>jdg-7.0</jdg.slot>
   </properties>
 
   <repositories>
     <repository>
-        <id>jboss-ga-repository</id>
-        <url>http://maven.repository.redhat.com/techpreview/all</url>
-        <releases>
-          	<enabled>true</enabled>
-        </releases>
-        <snapshots>
-          	<enabled>false</enabled>
-        </snapshots>
-    </repository>
-
+       <id>release.fusesource.org</id>
+       <name>Red Hat GA</name>
+       <url>https://maven.repository.redhat.com/ga</url>
+       <snapshots>
+           <enabled>false</enabled>
+       </snapshots>
+       <releases>
+           <enabled>true</enabled>
+       </releases>
+   </repository>
   </repositories>
+
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.infinispan</groupId>
+              <artifactId>infinispan-bom</artifactId>
+              <version>${version.org.infinispan}</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
 
   <dependencies>
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-flow</artifactId>
-			<version>6.2.0.Final-redhat-9</version>
+			<version>${jbpm.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 	      <groupId>org.jbpm</groupId>
 	      <artifactId>jbpm-flow-builder</artifactId>
-	      <version>6.2.0.Final-redhat-9</version>
+	      <version>${jbpm.version}</version>
 			<scope>provided</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>org.jbpm</groupId>
 	      <artifactId>jbpm-bpmn2</artifactId>
-	      <version>6.2.0.Final-redhat-9</version>
+	      <version>${jbpm.version}</version>
 			<scope>provided</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>org.jbpm</groupId>
 	      <artifactId>jbpm-persistence-jpa</artifactId>
-	      <version>6.2.0.Final-redhat-9</version>
+	      <version>${jbpm.version}</version>
 			<scope>provided</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>org.jbpm</groupId>
 	      <artifactId>jbpm-human-task-core</artifactId>
-	      <version>6.2.0.Final-redhat-9</version>
+	      <version>${jbpm.version}</version>
 			<scope>provided</scope>
 	    </dependency>
 	    <dependency>
 	      <groupId>org.jbpm</groupId>
 	      <artifactId>jbpm-runtime-manager</artifactId>
-	      <version>6.2.0.Final-redhat-9</version>
+	      <version>${jbpm.version}</version>
 			<scope>provided</scope>
-	    </dependency>
-	    
-	    <!-- Import the infinispan core -->
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-core</artifactId>
-            <version>${version.org.infinispan}</version>
-            <scope>compile</scope>
-        </dependency>
 
-        <!-- Import the Infinispan client hotrod -->
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-client-hotrod</artifactId>
-            <version>${version.org.infinispan}</version>
-            <scope>compile</scope>
-        </dependency>
-	</dependencies>
-	
+	    </dependency>
+
+	    <!-- Import the infinispan core -->
+      <dependency>
+         <groupId>org.infinispan</groupId>
+         <artifactId>infinispan-core</artifactId>
+         <scope>provided</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.infinispan</groupId>
+         <artifactId>infinispan-client-hotrod</artifactId>
+         <scope>provided</scope>
+      </dependency>
+
+
+     </dependencies>
+
 	<build>
     <plugins>
       <plugin>
@@ -99,13 +111,13 @@
               <mode>development</mode>
               <url>${project.url}</url>
               <key>value</key>
-              <Dependencies>org.infinispan.commons:jdg-6.6 services, org.infinispan.client.hotrod:jdg-6.6 services</Dependencies>
+              <Dependencies>org.infinispan.commons:${jdg.slot} services, org.infinispan.client.hotrod:${jdg.slot} services</Dependencies>
             </manifestEntries>
           </archive>
         </configuration>
       </plugin>
     </plugins>
-  
+
   </build>
 
 </project>

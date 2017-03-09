@@ -15,7 +15,7 @@ USER root
 #
 # Code taken from: https://github.com/DataVirtualizationByExample/DVWorkshop
 ###########################################################################
-RUN yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-1.noarch.rpm  && \
+RUN yum -y install http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-redhat93-9.3-3.noarch.rpm  && \
     yum -y install postgresql93-server postgresql93-contrib phpPgAdmin sudo; yum clean all && \
     service postgresql-9.3 initdb
 

@@ -4,7 +4,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
 
-ENV BUNDLE_NAME datacenter_receiver-1.0.0-SNAPSHOT.jar
+ENV BUNDLE_NAME receiver-1.0.0-SNAPSHOT.jar
 ENV BROKER_NAME iotdatacenterreceiver
 
 # copy required ( or not ) configurations
@@ -12,20 +12,16 @@ ADD Docker_Files/config/activemq.xml $HOME/tmp/
 
 # copy helper_install script
 ADD Docker_Files/scripts/install.sh $HOME/tmp/
-
-# copy deployable
-# ADD src $HOME/tmp/src/
-# ADD pom.xml $HOME/tmp/
-ADD target/datacenter_receiver-1.0.0-SNAPSHOT.jar $HOME/tmp/
+ADD Docker_Files/scripts/run.sh $HOME/
 
 # let the user 'psteiner' own the files
-RUN chown -R psteiner:psteiner $HOME
+RUN chown -R psteiner $HOME
 
 # continue as 'psteiner'
 USER psteiner
 
-RUN chmod +x $HOME/tmp/install.sh
-RUN chmod +x $HOME/run.sh
+RUN chmod +x $HOME/tmp/install.sh && \
+    chmod +x $HOME/run.sh
 
 # run the helper_install script
 WORKDIR $HOME/tmp

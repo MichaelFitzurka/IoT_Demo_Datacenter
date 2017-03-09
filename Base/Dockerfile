@@ -3,8 +3,8 @@ FROM    centos:centos6
 MAINTAINER psteiner <psteiner@redhat.com>
 
 # Update the system and Install necessary RPMs
-RUN yum -y update && \ 
-    yum -y install java-1.7.0-openjdk java-1.7.0-openjdk-devel unzip wget telnet && \
+RUN yum -y update && \
+    yum -y install java-1.7.0-openjdk java-1.7.0-openjdk-devel unzip wget && \
     yum clean all
 
 # Make sure required environments are set
@@ -16,15 +16,16 @@ ENV MAVEN_HOME /opt/maven
 RUN echo "root:redhat" | /usr/sbin/chpasswd
 
 # download and install maven
-RUN wget http://ftp.fau.de/apache/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip
-RUN unzip apache-maven-3.2.5-bin.zip
-RUN mv apache-maven-3.2.5/ /opt/maven
-RUN ln -s /opt/maven/bin/mvn /usr/bin/mvn
-RUN rm apache-maven-3.2.5-bin.zip
+RUN wget http://ftp.fau.de/apache/maven/maven-3/3.2.5/binaries/apache-maven-3.2.5-bin.zip && \
+    unzip apache-maven-3.2.5-bin.zip && \
+    mv apache-maven-3.2.5/ /opt/maven && \
+    ln -s /opt/maven/bin/mvn /usr/bin/mvn && \
+    rm apache-maven-3.2.5-bin.zip
+
 
 
 # Create user to run processed
-RUN useradd -m -d /home/psteiner -p psteiner psteiner 
+RUN useradd -u 1000 -g 50 -m -d /home/psteiner -p psteiner psteiner
 
 # Switch to new user
 USER psteiner
@@ -39,7 +40,7 @@ ADD config/settings.xml $HOME/.m2/
 # as ADD always uses root as user, we have to give
 # the file back to 'psteiner'
 USER root
-RUN chown -R psteiner:psteiner $HOME/.m2/*
+RUN chown -R psteiner $HOME/.m2/*
 USER psteiner
 
 # lets create a volume to mount the external maven repo

@@ -26,8 +26,10 @@ public class LightWorkItemHandler implements WorkItemHandler {
 		deviceType = (String)wi.getParameter("deviceType");
 		deviceID = (String)wi.getParameter("deviceID");
 		
+		System.out.println("Sending HTTP-Get <http://receiver:4711/lightsOff?deviceType="+deviceType+"&deviceID="+deviceID+"<");
+		
 		try {
-			producer.sendGet("http://receiver:4711/lightsOff");
+			producer.sendGet("http://receiver:4711/lightsOff?deviceType="+deviceType+"&deviceID="+deviceID);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

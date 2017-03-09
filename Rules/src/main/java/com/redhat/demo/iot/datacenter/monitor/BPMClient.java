@@ -56,6 +56,7 @@ public class BPMClient {
 		}
 		catch( MalformedURLException e )
 		{
+			e.printStackTrace(System.out);
 			throw new IllegalStateException( "This URL is always expected to be valid!", e );
 		}
 	}

@@ -14,14 +14,14 @@ WORKDIR $HOME
 ADD Docker_Files/software/$JDG_INSTALL_IMAGE $HOME/tmp/
 
 # let the user 'psteiner' own the files
-RUN chown -R psteiner:psteiner $HOME
+RUN chown -R psteiner $HOME
 
 # continue as 'psteiner'
 USER psteiner
 
 # extract
-RUN unzip $HOME/tmp/$JDG_INSTALL_IMAGE
-RUN mv $HOME/$JDG_INSTALL_DIR $HOME/$JDG_LOCATION
+RUN unzip $HOME/tmp/$JDG_INSTALL_IMAGE && \
+    mv $HOME/$JDG_INSTALL_DIR $HOME/$JDG_LOCATION
 
 # remove some overhead
 RUN rm -rf $HOME/tmp/$JDG_INSTALL_IMAGE
