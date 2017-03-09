@@ -47,6 +47,12 @@
 	          </snapshots>
         </repository>
 
+		<repository>
+            <id>paho-mqtt-client</id>
+            <name>Paho MQTT Client</name>
+            <url>https://repo.eclipse.org/content/repositories/paho-releases/</url>
+        </repository>
+
 	    <repository>
 	    	<releases>
 	        	<enabled>true</enabled>
