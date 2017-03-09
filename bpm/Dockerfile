@@ -58,8 +58,7 @@ WORKDIR $HOME
 EXPOSE 8080 9990 9418
 
 # ENTRYPOINT
-CMD $HOME/$BPMHOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 -Dorg.kie.override.deploy.enabled=true  -Djava.security.egd=file:/dev/urandom
-
+CMD $HOME/$BPMHOME/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 -Dorg.kie.override.deploy.enabled=true -Djava.security.egd=file:/dev/urandom
 
 # Build command -> docker build --rm -t workspacefuse_iotdatacenterbpm .
 # run command -> docker run -d -p 10000:8080 workspacefuse_iotdatacenterbpm
