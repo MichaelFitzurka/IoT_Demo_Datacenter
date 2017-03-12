@@ -8,6 +8,9 @@ import java.util.Map;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.remote.client.api.RemoteRestRuntimeEngineFactory;
+
+import com.redhat.demo.iot.utils.DataSet;
+
 import org.kie.api.task.TaskService;
 import org.kie.api.runtime.process.ProcessInstance;
 

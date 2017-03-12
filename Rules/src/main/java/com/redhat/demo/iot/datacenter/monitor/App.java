@@ -17,9 +17,11 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
+import com.redhat.demo.iot.utils.DataSet;
+
 public class App
 {
-    private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
+    private static final Logger log = Logger.getLogger(BRMSRunner.class.getName());
 
 
 
@@ -47,7 +49,7 @@ public class App
 
 		Consumer consumer = new Consumer(sourceQueue, sourceAMQBroker);
 
-		BRMSServer brmsServer = new BRMSServer();
+		BRMSRunner brmsServer = new BRMSRunner();
 
 		while ( true ) {
 			messageFromQueue = consumer.run(20000);
@@ -77,7 +79,7 @@ public class App
 
 	            if ( ( cacheValue == null ) || ( cacheValue.contains("solved")) ) {
 
-	            	event = brmsServer.insert( event);
+	            	event = brmsServer.fireRules( event);
 
 		            System.out.println("Rules Event-DeviceType <"+event.getDeviceType()+">");
 
