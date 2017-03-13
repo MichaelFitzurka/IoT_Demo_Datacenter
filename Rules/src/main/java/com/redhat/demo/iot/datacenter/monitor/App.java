@@ -79,6 +79,8 @@ public class App
 
 	            if ( ( cacheValue == null ) || ( cacheValue.contains("solved")) ) {
 
+	            	System.out.println("Firing event for DeviceType <"+event.getDeviceType()+"> with value <"+event.getPayload()+">");
+	            	
 	            	event = brmsServer.fireRules( event);
 	            	
 	            	System.out.println("event <"+event.getDeviceType()+event.getDeviceID()+"> ["+ event.getErrorCode() +"] " + event.getErrorMessage());
