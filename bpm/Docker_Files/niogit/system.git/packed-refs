@@ -1,0 +1,7 @@
+# pack-refs with: peeled
+3654187e04198ed6bbee6d5864be2e3a9c6d952f refs/heads/locks
+8b3ede66ded793f717c02dfffa5a57a87ad234eb refs/heads/mailman-uf-user
+9c6d665a315bd4780aa25345e2cd69ee5ee07a68 refs/heads/master
+a34d5f959748b850fc07792cdd5b845f2d65f59e refs/heads/psteiner-uf-user
+60cee07dcb2950eaa1b150d6af720e96958cb8da refs/heads/social
+33d70fb8ac175f950fa2d72882a6b093d5e6b836 refs/heads/system-uf-user
