@@ -17,7 +17,6 @@ public class DataGridHelper {
 		Properties properties = new Properties();
 		properties.setProperty(ConfigurationProperties.SERVER_LIST, "jdg:11222");
 		
-//		cacheManager = new RemoteCacheManager(properties);
 		cacheManager = new RemoteCacheManager("jdg:11222");
 		cache = cacheManager.getCache("default");
 	}

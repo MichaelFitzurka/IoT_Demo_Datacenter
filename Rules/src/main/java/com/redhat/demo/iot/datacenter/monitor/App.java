@@ -17,9 +17,11 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
+import com.redhat.demo.iot.utils.DataSet;
+
 public class App
 {
-    private static final Logger log = Logger.getLogger(BRMSServer.class.getName());
+    private static final Logger log = Logger.getLogger(BRMSRunner.class.getName());
 
 
 
@@ -47,7 +49,7 @@ public class App
 
 		Consumer consumer = new Consumer(sourceQueue, sourceAMQBroker);
 
-		BRMSServer brmsServer = new BRMSServer();
+		BRMSRunner brmsServer = new BRMSRunner();
 
 		while ( true ) {
 			messageFromQueue = consumer.run(20000);
@@ -64,7 +66,7 @@ public class App
 	            event.setRequired(0);
 	            event.setErrorCode(0);
 
-	            System.out.println("checking with cache if we know this event already.");
+	            System.out.println("Checking cache if we have an open issue from Device <"+event.getDeviceType()+"> with the ID <"+event.getDeviceID()+">");
 
 	            // Validate if we already have an open process for this
 	            try {
@@ -73,13 +75,15 @@ public class App
 					cacheValue=null;
 				}
 
-	            System.out.println("Cached value for <"+event.getDeviceType()+event.getDeviceID()+"> is <"+cacheValue+">");
+	            System.out.println("Cached value for "+event.getDeviceType()+" with ID "+event.getDeviceID()+" is "+cacheValue);
 
 	            if ( ( cacheValue == null ) || ( cacheValue.contains("solved")) ) {
 
-	            	event = brmsServer.insert( event);
-
-		            System.out.println("Rules Event-DeviceType <"+event.getDeviceType()+">");
+	            	System.out.println("Verify DeviceType "+event.getDeviceType()+" with ID "+event.getDeviceID()+ " with value "+event.getPayload()+" against business rules");
+	            	
+	            	event = brmsServer.fireRules( event);
+	            	
+	            	System.out.println("event <"+event.getDeviceType()+event.getDeviceID()+"> ["+ event.getErrorCode() +"] " + event.getErrorMessage());
 
 		            if ( event.getErrorCode() != 0 ) {
 
@@ -89,13 +93,13 @@ public class App
 		            		BPMClient bpmClient = new BPMClient();
 
 		            		bpmClient.doCall("http://bpm:8080/business-central",
-                    "RedHat:IoTProcesses:1.0",
-                    "IoTProcesses.IoTEvent",
-                    "psteiner", "change12_me",
-        				     event);
+						                    "RedHat:IoTProcesses:1.0",
+						                    "IoTProcesses.IoTEvent",
+						                    "psteiner", "change12_me",
+				        				     event);
 
 		            	} catch (Exception ex) {
-                    ex.printStackTrace(System.out);
+		            		ex.printStackTrace(System.out);
 		            		System.out.println("Exception when calling BPMSuite");
 		                }
 
@@ -112,10 +116,13 @@ public class App
 							e.printStackTrace();
 						}
 
+		            } else {
+		            	
+		            	System.out.println("Business Rules report no reason to act.");
 		            }
 
 	            } else {
-	            	System.out.println("No need to call BRMS, we know this already");
+	            	System.out.println("No need to start business process, we know this event already");
 	            }
 
 			}

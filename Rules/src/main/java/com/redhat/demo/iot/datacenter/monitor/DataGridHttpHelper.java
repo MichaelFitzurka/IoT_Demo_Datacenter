@@ -22,7 +22,7 @@ public class DataGridHttpHelper {
 //	      System.out.println("----------------------------------------");
 
 	      URL address = new URL(urlServerAddress);
-	      System.out.println("executing request " + urlServerAddress);
+//	      System.out.println("executing request " + urlServerAddress);
 
 	      HttpURLConnection connection = (HttpURLConnection) address.openConnection();
 	      connection.setRequestMethod("GET");
