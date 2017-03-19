@@ -4,6 +4,13 @@ echo "-Building deployables"
 
 export BUILD_LOGFILE="../build.log"
 
+echo "-- DataSet utility class"
+pushd . > /dev/null
+cd DataSet
+mvn clean install >>  $BUILD_LOGFILE
+popd > /dev/null
+
+
 echo "-- iot_datacenter_receiver"
 pushd . > /dev/null
 cd receiver
