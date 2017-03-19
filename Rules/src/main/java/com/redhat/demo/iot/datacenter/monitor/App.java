@@ -2,18 +2,13 @@ package com.redhat.demo.iot.datacenter.monitor;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.logging.Logger;
 
-import javax.jms.ConnectionFactory;
 import javax.jms.JMSException;
-import javax.jms.TextMessage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.apache.activemq.ActiveMQConnectionFactory;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 
