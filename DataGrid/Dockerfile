@@ -2,11 +2,13 @@ FROM    psteiner/base
 
 MAINTAINER psteiner <psteiner@redhat.com>
 
-ENV JDG_INSTALL_IMAGE jboss-datagrid-6.6.0-server.zip
-ENV JDG_INSTALL_DIR jboss-datagrid-6.6.0-server
+ENV JDG_INSTALL_IMAGE jboss-datagrid-7.0.0-server.zip
+ENV JDG_INSTALL_DIR jboss-datagrid-7.0.0-server
 ENV JDG_LOCATION jdg
 
 USER root
+
+RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 WORKDIR $HOME
 
