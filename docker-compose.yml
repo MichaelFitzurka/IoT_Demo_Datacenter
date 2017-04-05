@@ -25,6 +25,10 @@ receiver:
                 # - GATEWAY_JMS_BROKER_URL=tcp://192.168.178.116:61616
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
+                - INFLUXDASHBOARD=TRUE
+                - INFLUXHOST=localhost
+                - INFLUXPORT=8086
+                - INFLUXURI=write?db=IoT_Demo
         privileged: true
         volumes:
                 - ./receiver/target:/home/psteiner/target
@@ -48,10 +52,6 @@ rules:
                 - TARGET_QUEUE=message.to.datacenter
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
-                - INFLUXDASHBOARD=TRUE
-                - INFLUXHOST=localhost
-                - INFLUXPORT=8086
-                - INFLUXURI=write?db=IoT_Demo
         privileged: true
         volumes:
                 - ./Rules/target:/home/psteiner/target
