@@ -17,11 +17,11 @@ ADD Docker_Files/scripts/run.sh $HOME/
 # let the user 'psteiner' own the files
 RUN chown -R psteiner $HOME
 
-# continue as 'psteiner'
-USER psteiner
-
 RUN chmod +x $HOME/tmp/install.sh && \
     chmod +x $HOME/run.sh
+
+# continue as 'psteiner'
+USER psteiner
 
 # run the helper_install script
 WORKDIR $HOME/tmp

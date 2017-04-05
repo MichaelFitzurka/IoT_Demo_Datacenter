@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Configures the Camel Context -->
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
     <bean class="org.apache.activemq.camel.component.ActiveMQComponent" id="activemq">
         <property name="connectionFactory">
             <bean class="org.apache.activemq.ActiveMQConnectionFactory">
@@ -11,17 +12,6 @@
         </property>
     </bean>
     <!-- Adding the properties bean in order to change the influxdb parameters in a flexible way outside the Camel Route -->
-    <bean class="org.apache.camel.spring.spi.BridgePropertyPlaceholderConfigurer" id="influxDBProps">
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="locations">
-            <list>
-                <value>classpath:influxdb.properties</value>
-                <value>file:influxdb.properties</value>
-                <value>file:${karaf.home}/etc/influxdb.properties</value>
-                <value>file:etc/influxdb.properties</value>
-            </list>
-        </property>
-    </bean>
     <bean class="org.apache.commons.dbcp.BasicDataSource" id="datasource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://postgres:5432/demo"/>
@@ -32,15 +22,16 @@
         <property name="defaultAutoCommit" value="false"/>
     </bean>
     <bean class="com.redhat.demo.iot.datacenter.receiver.DataToSQLBean" id="dataToSQL"/>
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="bean-1caa286e-66ce-4289-91e1-4f1d54aca3e4"/>
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="bean-1caa286e-66ce-4289-91e1-4f1d54aca3e4"/>
     <bean class="com.redhat.demo.iot.datacenter.receiver.MyJettyService" id="myJettyProcessor"/>
     <camelContext id="camelContext-bad24f48-d274-40bc-bb57-4bd7a5c1c039" xmlns="http://camel.apache.org/schema/spring">
         <route id="datacenter_receive">
             <!-- Getting the environment variable DASHBOARD -->
-            <from id="_from1" uri="activemq:queue:message.to.datacenter"/>
             <!-- Setting the recepient list depending on the Environment Variable -->
-            <log id="_log1" message="${body}"/>
+            <from id="_from1" uri="activemq:queue:message.to.datacenter"/>
             <!-- Executing the recipient list -->
+            <log id="_log1" message="${body}"/>
             <setHeader headerName="DashboardEnabled" id="_setHeader1">
                 <simple>${sysenv.INFLUXDASHBOARD}</simple>
             </setHeader>
@@ -48,12 +39,12 @@
                 <when id="_when1">
                     <simple>${header.DashboardEnabled} == "TRUE"</simple>
                     <setHeader headerName="routeList" id="_setHeader2">
-                        <constant>direct:Monitoring,direct:filtering,direct:sendToInfluxDB</constant>
+                        <constant>direct:Monitoring,direct:sendToInfluxDB</constant>
                     </setHeader>
                 </when>
                 <otherwise id="_otherwise1">
                     <setHeader headerName="routeList" id="_setHeader3">
-                        <constant>direct:Monitoring,direct:filtering</constant>
+                        <constant>direct:Monitoring</constant>
                     </setHeader>
                 </otherwise>
             </choice>
@@ -61,44 +52,7 @@
                 <header>routeList</header>
             </recipientList>
         </route>
-        <route id="Filtering">
-            <from id="_from2" uri="direct:filtering"/>
-            <unmarshal id="_unmarshal1">
-                <jaxb contextPath="com.redhat.demo.iot.datacenter.receiver"/>
-            </unmarshal>
-            <choice id="_choice1">
-                <when id="_when1">
-                    <simple>${body.deviceType} == 'temperature'</simple>
-                    <to id="_to3" uri="direct:handleTemperature"/>
-                </when>
-                <when id="_when2">
-                    <simple>${body.deviceType} == 'humidity'</simple>
-                    <to id="_to4" uri="direct:handleHumidity"/>
-                </when>
-                <when id="_when3">
-                    <simple>${body.deviceType} == 'voltage'</simple>
-                    <to id="_to5" uri="direct:handleVoltage"/>
-                </when>
-            </choice>
-        </route>
-        <route id="Temperature">
-            <from id="_from3" uri="direct:handleTemperature"/>
-            <log id="_log2" message="In Temperature"/>
-            <to id="_to6" uri="bean:dataToSQL?method=toSql(${body},'temperature')"/>
-            <to id="_to7" uri="jdbc:datasource"/>
-        </route>
-        <route id="Humidity">
-            <from id="_from4" uri="direct:handleHumidity"/>
-            <log id="_log3" message="In Humidity"/>
-            <to id="_to8" uri="bean:dataToSQL?method=toSql(${body},'humidity')"/>
-            <to id="_to9" uri="jdbc:datasource"/>
-        </route>
-        <route id="Voltage">
-            <from id="_from5" uri="direct:handleVoltage"/>
-            <log id="_log4" message="In Voltage"/>
-            <to id="_to10" uri="bean:dataToSQL?method=toSql(${body},'voltage')"/>
-            <to id="_to11" uri="jdbc:datasource"/>
-        </route>
+        
         <route id="Monitoring">
             <from id="_from6" uri="direct:Monitoring"/>
             <log id="_log5" message="Message will be send to rules server"/>
