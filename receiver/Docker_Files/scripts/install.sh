@@ -22,3 +22,6 @@ echo "postgresql"
 $HOME/$FUSE_LOCATION/bin/client -h 127.0.0.1 -r 60 -d 10 "osgi:install -s wrap:mvn:org.postgresql/postgresql/9.3-1102-jdbc41"
 echo "camel-jetty"
 $HOME/$FUSE_LOCATION/bin/client -h 127.0.0.1 -r 60 -d 10 "features:install camel-jetty"
+echo "camel-http4"
+$HOME/$FUSE_LOCATION/bin/client -h 127.0.0.1 -r 60 -d 10 "features:install camel-http4"
+

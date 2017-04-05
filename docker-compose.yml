@@ -48,6 +48,10 @@ rules:
                 - TARGET_QUEUE=message.to.datacenter
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
+                - INFLUXDASHBOARD=TRUE
+                - INFLUXHOST=localhost
+                - INFLUXPORT=8086
+                - INFLUXURI=write?db=IoT_Demo
         privileged: true
         volumes:
                 - ./Rules/target:/home/psteiner/target
