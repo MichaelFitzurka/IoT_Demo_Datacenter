@@ -21,7 +21,7 @@ receiver:
                 - postgres
         environment:
                 # URL of Broker on Gateway
-                - GATEWAY_JMS_BROKER_URL=tcp://192.168.42.1:61616
+                - GATEWAY_JMS_BROKER_URL=tcp://52.42.245.231:61616
                 # - GATEWAY_JMS_BROKER_URL=tcp://192.168.178.116:61616
                 - BROKER_ADMIN_UID=admin
                 - BROKER_ADMIN_PASSWD=change12_me
@@ -31,7 +31,7 @@ receiver:
                 - INFLUXURI=write?db=IoT_Demo
         privileged: true
         volumes:
-                - ./receiver/target:/home/psteiner/target
+                - ./receiver/target:/home/psteiner/fuse/deploy
                 - ~/.m2/repository:/home/psteiner/.m2/repository
 
 
