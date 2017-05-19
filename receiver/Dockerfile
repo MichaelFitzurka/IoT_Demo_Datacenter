@@ -4,8 +4,8 @@ LABEL maintainer "psteiner <psteiner@redhat.com>"
 
 USER root
 
-ENV BUNDLE_NAME receiver-1.0.0-SNAPSHOT.jar \
-    BROKER_NAME iotdatacenterreceiver
+ENV BUNDLE_NAME=receiver-1.0.0-SNAPSHOT.jar \
+    BROKER_NAME=iotdatacenterreceiver
 
 # copy required ( or not ) configurations
 ADD Docker_Files/config/activemq.xml $HOME/tmp/

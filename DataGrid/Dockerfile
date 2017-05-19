@@ -2,9 +2,9 @@ FROM    psteiner/base
 
 LABEL maintainer "psteiner <psteiner@redhat.com>"
 
-ENV JDG_INSTALL_IMAGE jboss-datagrid-7.0.0-server.zip \
-    JDG_INSTALL_DIR jboss-datagrid-7.0.0-server \
-    JDG_LOCATION jdg
+ENV JDG_INSTALL_IMAGE=jboss-datagrid-7.0.0-server.zip \
+    JDG_INSTALL_DIR=jboss-datagrid-7.0.0-server \
+    JDG_LOCATION=jdg
 
 USER root
 

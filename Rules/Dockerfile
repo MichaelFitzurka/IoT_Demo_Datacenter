@@ -4,7 +4,7 @@ MAINTAINER psteiner <psteiner@redhat.com>
 
 USER root
 
-ENV APPL rules-jar-with-dependencies.jar
+ENV APPL=rules-jar-with-dependencies.jar
 
 # transfer install-script
 ADD Docker_Files/scripts/run.sh $HOME/

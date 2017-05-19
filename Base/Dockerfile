@@ -8,9 +8,9 @@ RUN yum -y update && \
     yum clean all
 
 # Make sure required environments are set
-ENV JAVA_HOME /usr/lib/jvm/jre \
-    HOME /home/psteiner \
-    MAVEN_HOME /opt/maven
+ENV JAVA_HOME=/usr/lib/jvm/jre \
+    HOME=/home/psteiner \
+    MAVEN_HOME=/opt/maven
 
 # Set root password
 RUN echo "root:redhat" | /usr/sbin/chpasswd

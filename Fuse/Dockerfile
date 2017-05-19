@@ -2,9 +2,9 @@ FROM    psteiner/base
 
 LABEL maintainer "psteiner <psteiner@redhat.com>"
 
-ENV FUSE_INSTALL_IMAGE jboss-fuse-karaf-6.3.0.redhat-187.zip \
-    FUSE_INSTALL_DIR jboss-fuse-6.3.0.redhat-187 \
-    FUSE_LOCATION fuse
+ENV FUSE_INSTALL_IMAGE=jboss-fuse-karaf-6.3.0.redhat-187.zip \
+    FUSE_INSTALL_DIR=jboss-fuse-6.3.0.redhat-187 \
+    FUSE_LOCATION=fuse
 
 USER root
 
