@@ -101,7 +101,7 @@ public class App
 
 		            	System.out.println("Need to turn on alarm light!");
 		            	MQTTProducer producer = new MQTTProducer(targetMQTTBroker, brokerUID, brokerPassword, "rules_server");
-		            	producer.run("iotdemocommand/light", "an");
+		            	producer.run("iotdemocommand/light", event.getDeviceID() + "|on");
 
 		            	System.out.println("Pushing this event to distributed Cache");
 		            	try {

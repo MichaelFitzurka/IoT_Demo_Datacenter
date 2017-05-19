@@ -1,6 +1,6 @@
 FROM psteiner/base
 
-MAINTAINER Andrew Block <andy.block@gmail.com>
+LABEL maintainer "Andrew Block <andy.block@gmail.com>"
 
 ENV HOME=/opt/zeppelin \
     MAVEN_VERSION=3.3.9 \

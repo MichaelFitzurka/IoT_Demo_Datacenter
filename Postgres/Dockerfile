@@ -1,12 +1,12 @@
 # DOCKER-VERSION 0.3.4
 FROM    psteiner/base
 
-MAINTAINER psteiner <psteiner@redhat.com>
+LABEL maintainer "psteiner <psteiner@redhat.com>"
 
-ENV JAVA_HOME /usr/lib/jvm/jre
-ENV PGDATA /var/lib/pgsql/9.3/data
-ENV PGINST /usr/pgsql-9.3
-ENV HOME /home/postgres
+ENV JAVA_HOME /usr/lib/jvm/jre \
+    PGDATA /var/lib/pgsql/9.3/data \
+    PGINST /usr/pgsql-9.3 \
+    HOME /home/postgres
 
 USER root
 

@@ -14,7 +14,7 @@ public class MyJettyService implements Processor {
 //	        							0, 
 //	        							0, 
 //        							0  );
-		 String data = "aus";
+		 String data = exchange.getIn().getHeader("deviceID") + "|off";
 		 
 	        System.out.println("DeviceType received by Camel ( fullset ) = " + exchange.getIn().getHeader("deviceType") );
 	 

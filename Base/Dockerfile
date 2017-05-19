@@ -1,6 +1,6 @@
 FROM    centos:centos6
 
-MAINTAINER psteiner <psteiner@redhat.com>
+LABEL maintainer "psteiner <psteiner@redhat.com>"
 
 # Update the system and Install necessary RPMs
 RUN yum -y update && \
@@ -8,9 +8,9 @@ RUN yum -y update && \
     yum clean all
 
 # Make sure required environments are set
-ENV JAVA_HOME /usr/lib/jvm/jre
-ENV HOME /home/psteiner
-ENV MAVEN_HOME /opt/maven
+ENV JAVA_HOME /usr/lib/jvm/jre \
+    HOME /home/psteiner \
+    MAVEN_HOME /opt/maven
 
 # Set root password
 RUN echo "root:redhat" | /usr/sbin/chpasswd
