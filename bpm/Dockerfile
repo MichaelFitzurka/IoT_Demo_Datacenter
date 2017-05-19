@@ -6,7 +6,7 @@ USER root
 
 ENV BPMHOME=jboss-eap-7.0 \
     EAP_PACKAGE=jboss-eap-7.0.0.zip \
-    JBOSS_PATCH=jboss-eap-7.0.5-patch.zip \
+    JBOSS_PATCH=jboss-eap-7.0.3-patch.zip \
     BPM_PACKAGE=jboss-bpmsuite-6.4.0.GA-deployable-eap7.x.zip \
     JDG_PACKAGE=jboss-datagrid-7.0.0-eap-modules-library
 
@@ -31,7 +31,7 @@ RUN unzip $HOME/tmp/$EAP_PACKAGE -d $HOME && \
 
 # patch JBoss EAP
 WORKDIR $HOME/$BPMHOME
-RUN ./bin/jboss-cli.sh "patch apply --override-all $HOME/tmp/$JBOSS_PATCH"
+RUN ./bin/jboss-cli.sh "patch apply $HOME/tmp/$JBOSS_PATCH"
 
 # copy configurations to their place
 RUN mv $HOME/tmp/applic* $HOME/$BPMHOME/standalone/configuration
