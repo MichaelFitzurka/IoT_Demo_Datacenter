@@ -88,7 +88,7 @@ public class App
 		            		BPMClient bpmClient = new BPMClient();
 
 		            		bpmClient.doCall("http://bpm:8080/business-central",
-						                    "RedHat:IoTProcesses:1.0",
+						                    "RedHat:IoTProcesses:LATEST",
 						                    "IoTProcesses.IoTEvent",
 						                    "psteiner", "change12_me",
 				        				     event);
